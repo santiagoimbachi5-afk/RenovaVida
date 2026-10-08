@@ -1,0 +1,33 @@
+.esencia {
+  padding: 3rem 2rem;
+  text-align: center;
+  background: linear-gradient(180deg, #e4ecff 0%, #b9cdf7 100%);
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  color: #3f3f3f;
+}
+h2{
+  text-align: center;
+  color: #12307f;
+  font-size: 32px;
+}
+.esencia h2::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 4px;
+  margin: 12px auto 0;
+  border-radius: 4px;
+  
+  
+}
+section p{
+  margin: 12px;
+
+}
+.esencia__tarjetas {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  max-width: 900px;
+  margin: 2rem auto 0;
+}
