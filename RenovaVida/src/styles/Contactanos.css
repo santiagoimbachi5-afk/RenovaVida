@@ -1,0 +1,117 @@
+/* ===== Fondo de la página ===== */
+.contacto-pagina {
+  min-height: 80vh;
+  background: #4472e0;
+}
+
+.contacto-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* ===== Título RenovaVida ===== */
+.contacto-titulo {
+  color: white;
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+.contacto-titulo span {
+  color: #6cb8ff;
+}
+
+/* ===== Formulario ===== */
+.contacto-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 340px;
+}
+
+.contacto-form h2 {
+  color: white;
+  font-size: 16px;
+  margin: 0 0 10px;
+}
+
+/* ===== Inputs (píldoras) y textarea ===== */
+.contacto-form input,
+.contacto-form textarea {
+  background: #f0f0f5;
+  border: none;
+  padding: 10px 16px;
+  margin-bottom: 14px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #333;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
+  outline: none;
+}
+
+.contacto-form input {
+  border-radius: 20px;
+}
+
+.contacto-form textarea {
+  border-radius: 6px;
+  height: 120px;
+  resize: none;
+  margin-top: 10px;
+}
+
+.contacto-form input::placeholder,
+.contacto-form textarea::placeholder {
+  color: #666;
+}
+
+/* Aro celeste al hacer clic en un campo */
+.contacto-form input:focus,
+.contacto-form textarea:focus {
+  box-shadow: 0 0 0 2px #6cb8ff, 3px 3px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== Botón Enviar ===== */
+.contacto-boton {
+  align-self: center;
+  margin-top: 10px;
+  padding: 10px 50px;
+  border: none;
+  border-radius: 20px;
+  background: #0a9fe6;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
+  transition: background 0.3s;
+}
+
+.contacto-boton:hover {
+  background: #0880bb;
+}
+
+/* ===== Mensajes ===== */
+.contacto-error {
+  color: #ffd1d9;
+  font-size: 12px;
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+.contacto-exito {
+  color: #c8ffd9;
+  font-size: 12px;
+  margin: 0 0 6px;
+  text-align: center;
+}
+
+/* ===== Política de Privacidad ===== */
+.contacto-politica {
+  margin-top: 40px;
+  color: #dde6ff;
+  font-size: 12px;
+  text-decoration: none;
+}
