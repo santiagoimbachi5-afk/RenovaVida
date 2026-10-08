@@ -1,0 +1,29 @@
+.tarjeta {
+  /* Estado normal: azul combinado con blanco */
+  background: linear-gradient(135deg, #4472e0 0%, #ffffff 100%);
+  border-radius: 16px;
+  padding: 24px;
+  min-height: 200px;
+  box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  transition: background 0.4s, transform 0.3s;
+}
+
+/* El texto empieza invisible */
+.tarjeta-texto {
+  color: #12307f;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.4s, transform 0.4s;
+}
+
+/* Al pasar el ratón por la tarjeta */
+.tarjeta:hover {
+  background: linear-gradient(135deg, #ffffff 0%, #bcd0ff 100%);
+  transform: translateY(-4px);
+}
+
+.tarjeta:hover .tarjeta-texto {
+  opacity: 1;
+  transform: translateY(0);
+}
