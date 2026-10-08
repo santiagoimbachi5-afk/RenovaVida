@@ -1,0 +1,90 @@
+/* ===== Sección ===== */
+.valores {
+  background: linear-gradient(180deg, #e4ecff 0%, #b9cdf7 100%);
+  padding: 70px 20px;
+}
+
+/* ===== Título con subrayado decorativo ===== */
+.valores h2 {
+  text-align: center;
+  color: #12307f;
+  font-size: 32px;
+  margin: 0 0 50px;
+}
+
+.valores h2::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 4px;
+  margin: 12px auto 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #4472e0, #6cb8ff);
+  
+}
+
+/* ===== Contenedor ===== */
+.valores__contenido {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+/* ===== Valores como píldoras ===== */
+.valores__lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  flex: 1;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.valores__lista li {
+  padding: 10px 20px;
+  border-radius: 30px;
+  background: white;
+  color: #12307f;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 4px 10px rgba(68, 114, 224, 0.25);
+  cursor: default;
+  transition: transform 0.25s, background 0.25s, color 0.25s, box-shadow 0.25s;
+  animation: valores-aparecer 0.6s ease both;
+}
+
+.valores__lista li:hover {
+  transform: translateY(-4px) scale(1.05);
+  background: linear-gradient(135deg, #4472e0, #6cb8ff);
+  color: white;
+  box-shadow: 0 8px 18px rgba(68, 114, 224, 0.45);
+}
+
+/* Entrada escalonada de las píldoras */
+.valores__lista li:nth-child(2) { animation-delay: 0.1s; }
+.valores__lista li:nth-child(3) { animation-delay: 0.2s; }
+.valores__lista li:nth-child(4) { animation-delay: 0.3s; }
+.valores__lista li:nth-child(5) { animation-delay: 0.4s; }
+.valores__lista li:nth-child(6) { animation-delay: 0.5s; }
+
+@keyframes valores-aparecer {
+  from { opacity: 0; transform: translateY(15px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== Texto como tarjeta ===== */
+.valores__contenido p {
+  flex: 1.2;
+  margin: 0;
+  padding: 28px 32px;
+  border-left: 5px solid #4472e0;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.75);
+  color: #1c2b4a;
+  font-size: 16px;
+  line-height: column;
+}
