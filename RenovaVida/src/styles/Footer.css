@@ -1,0 +1,26 @@
+.footer {
+  padding: 2rem;
+  background: #14235c;
+  color: rgb(252, 252, 252);
+  
+}
+.footer div h3{
+  color: aliceblue;
+}
+
+.footer__contenido {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 2rem;
+}
+
+.footer li {
+  list-style: none;
+  margin-top: 0.4rem;
+}
+
+.footer__copy {
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.8rem;
+}
