@@ -1,0 +1,125 @@
+/* ===== Fondo de la página ===== */
+.sesion-pagina {
+  min-height: 80vh;
+  background: #4472e0;
+  font-family: sans-serif;
+}
+
+
+.sesion-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+/* ===== Título RenovaVida ===== */
+.sesion-titulo {
+  color: white;
+  font-size: 32px;
+  margin-bottom: 50px;
+}
+
+.sesion-titulo span {
+  color: #6cb8ff;
+}
+
+/* ===== Formulario ===== */
+.sesion-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 340px;
+}
+
+.sesion-form h2 {
+  color: white;
+  font-size: 16px;
+  margin: 0 0 10px;
+}
+
+/* ===== Inputs (píldoras) ===== */
+.sesion-form input[type="email"],
+.sesion-form input[type="password"] {
+  background: #f0f0f5;
+  border: none;
+  border-radius: 20px;
+  padding: 10px 16px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  font-family: inherit;
+  color: #333;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
+  outline: none;
+}
+
+.sesion-form input::placeholder {
+  color: #666;
+}
+
+/* Aro celeste al hacer clic en un campo */
+.sesion-form input[type="email"]:focus,
+.sesion-form input[type="password"]:focus {
+  box-shadow: 0 0 0 2px #6cb8ff, 3px 3px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* ===== Casilla de novedades ===== */
+.sesion-check {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: white;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.sesion-check input {
+  margin: 0;
+  cursor: pointer;
+}
+
+/* ===== Enlace Regístrate ===== */
+.sesion-registro {
+  align-self: flex-start;
+  margin-top: 6px;
+  color: white;
+  font-size: 11px;
+  text-decoration: underline;
+}
+
+/* ===== Botón Entrar ===== */
+.sesion-boton {
+  align-self: center;
+  margin-top: 20px;
+  padding: 10px 50px;
+  border: none;
+  border-radius: 20px;
+  background: #0a9fe6;
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 3px 3px 4px rgba(0, 0, 0, 0.4);
+  transition: background 0.3s;
+}
+
+.sesion-boton:hover {
+  background: #0880bb;
+}
+
+/* ===== Mensaje de error ===== */
+.sesion-error {
+  color: #ffd1d9;
+  font-size: 12px;
+  margin: 10px 0 0;
+  text-align: center;
+}
+
+/* ===== Política de Privacidad ===== */
+.sesion-politica {
+  margin-top: 80px;
+  color: #dde6ff;
+  font-size: 12px;
+  text-decoration: none;
+}
