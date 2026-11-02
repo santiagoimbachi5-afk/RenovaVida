@@ -1,10 +1,16 @@
 import { Outlet } from "react-router-dom";
+import SidebarProfesional from "../components/SidebarProfesional.jsx";
+import HeaderPanel from "../components/HeaderPanel.jsx";
+import "../styles/profesional.css";
 
 function LayoutProfesional() {
   return (
-    <div>
-      <h2>Aquí va el sidebar</h2>
-      <Outlet />
+    <div className="panel">
+      <SidebarProfesional />
+      <main className="panel-contenido">
+        <HeaderPanel />
+        <Outlet />
+      </main>
     </div>
   );
 }
