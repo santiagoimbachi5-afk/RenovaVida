@@ -2,15 +2,16 @@ import Navbar from './components/Navbar.jsx'
 import Inicio from './pages/SobreNosotros.jsx'
 import Contactanos from './pages/Contactanos.jsx'
 import Footer from './components/Footer.jsx'
-import { Routes, Route, useLocation } from "react-router-dom";   // 1. agregaste useLocation
+import { Routes, Route, useLocation, Navigate } from "react-router-dom"
 import IniciarSesion from './pages/IniciarSesion.jsx'
 import Registro from './pages/Registro.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
-import Perfil from './pages/profesional/Perfil.jsx'              // 2. nuevo import
+import Perfil from './pages/profesional/Perfil.jsx'
+import LayoutProfesional from './layouts/LayoutProfesional.jsx'
 
 function App() {
   const location = useLocation()
-  const esPanel = location.pathname.startsWith("/profesional")   // 3. detecta si estás en el panel
+  const esPanel = location.pathname.startsWith("/profesional")
 
   return (
     <>
@@ -22,7 +23,11 @@ function App() {
         <Route path="/contactanos" element={<Contactanos />} />
         <Route path="/iniciar-sesion" element={<IniciarSesion />} />
         <Route path="/registro" element={<Registro />} />
-        <Route path="/profesional" element={<Perfil />} />       {/* 4. nueva ruta */}
+
+        <Route path="/profesional" element={<LayoutProfesional />}>
+          <Route index element={<Navigate to="perfil" replace />} />
+          <Route path="perfil" element={<Perfil />} />
+        </Route>
       </Routes>
 
       {!esPanel && <Footer />}
