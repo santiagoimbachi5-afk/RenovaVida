@@ -1,0 +1,208 @@
+.panel {
+  display: flex;
+  min-height: 100vh;
+  background: #d9d9d9;
+  font-family: Arial, sans-serif;
+}
+
+/* ---------- Sidebar ---------- */
+.panel .sidebar {
+  width: 220px;
+  background: #12337c;
+  color: white;
+  margin: 8px;
+  border-radius: 12px;
+  padding: 20px 14px;
+}
+
+.panel .sidebar-logo {
+  font-size: 20px;
+  color: #cfe3ff;
+  margin-bottom: 50px;
+}
+
+.panel .sidebar-logo b {
+  color: #4fd1ff;
+}
+
+.panel .sidebar-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.panel .sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+  color: white;
+  text-decoration: none;
+  font-size: 13px;
+  border-radius: 6px;
+}
+
+.panel .sidebar-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.panel .sidebar-link.activo {
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.18);
+}
+
+/* ---------- Contenido y header ---------- */
+.panel .panel-contenido {
+  flex: 1;
+  padding: 8px 16px;
+}
+
+.panel .header-panel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: white;
+  padding: 14px 20px;
+  border-radius: 8px;
+  margin-bottom: 14px;
+}
+
+.panel .header-panel h1 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.panel .header-usuario {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+
+.panel .header-usuario p {
+  margin: 0;
+  font-weight: bold;
+}
+
+/* ---------- Tarjetas ---------- */
+.panel .tarjeta {
+  background: #f3f3f3;
+  border-radius: 12px;
+  padding: 14px;
+  font-size: 12px;
+}
+
+.panel .tarjeta h3 {
+  margin: 0 0 8px;
+  font-size: 13px;
+}
+
+.panel .tarjeta p {
+  margin: 4px 0;
+}
+
+.panel .tarjetas {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.panel .tarjetas-numeros {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.panel .tarjeta-numero {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.panel .tarjeta-numero strong {
+  font-size: 18px;
+}
+
+/* ---------- Listas ---------- */
+.panel .listas {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.panel .filtros {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.panel .filtros input,
+.panel .filtros button {
+  padding: 5px 8px;
+  border: 1px solid #aaa;
+  border-radius: 4px;
+  background: #e6e6e6;
+  font-size: 11px;
+}
+
+.panel .filtros input {
+  flex: 1;
+}
+
+.panel .profesional {
+  display: grid;
+  grid-template-columns: 40px 1fr 90px 70px 20px;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0;
+}
+
+.panel .foto {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #aaa;
+}
+
+.panel .profesional-datos {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel .estado {
+  background: #c8f5d0;
+  color: #1c7a2e;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 10px;
+  text-align: center;
+}
+
+.panel table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.panel th,
+.panel td {
+  text-align: left;
+  padding: 10px 4px;
+  font-size: 11px;
+}
+
+.panel .ver-mas {
+  display: block;
+  text-align: center;
+  margin-top: 12px;
+  font-size: 11px;
+  color: #1a5be0;
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 900px) {
+  .panel .tarjetas,
+  .panel .listas {
+    grid-template-columns: 1fr;
+  }
+}
