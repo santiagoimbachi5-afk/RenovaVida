@@ -206,3 +206,151 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ---------- Sidebar: rol ---------- */
+.panel .sidebar-rol {
+  display: block;
+  color: #ffe600;
+  font-size: 11px;
+  margin-top: 6px;
+}
+
+/* ---------- Programación de citas ---------- */
+.panel .citas {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr;
+  gap: 12px;
+  align-items: start;
+}
+
+.panel .calendario-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.panel .calendario-acciones { display: flex; gap: 8px; }
+
+.panel .btn-claro,
+.panel .btn-oscuro {
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  border: 1px solid #aaa;
+  background: white;
+}
+
+.panel .btn-oscuro {
+  background: #12337c;
+  color: white;
+  border-color: #12337c;
+}
+
+.panel .btn-oscuro.ancho { width: 100%; padding: 10px; }
+
+.panel .leyenda {
+  display: flex;
+  gap: 14px;
+  font-size: 11px;
+  margin: 10px 0;
+}
+
+.panel .punto {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  margin-right: 4px;
+}
+
+/* ---------- Grilla ---------- */
+.panel .grilla {
+  display: grid;
+  grid-template-columns: 60px repeat(4, 1fr);
+  gap: 3px;
+}
+
+.panel .grilla-fila { display: contents; }
+
+.panel .grilla-cabecera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 11px;
+  padding: 4px 0 8px;
+}
+
+.panel .grilla-hora {
+  font-size: 10px;
+  color: #555;
+  padding-top: 6px;
+}
+
+.panel .celda {
+  position: relative;
+  min-height: 34px;
+  padding: 4px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  color: #222;
+}
+
+.panel .libre, .panel .punto.libre { background: #d7ecd7; }
+.panel .verde, .panel .punto.verde { background: #8fd19e; }
+.panel .azul,  .panel .punto.azul  { background: #5b9bd5; color: white; }
+.panel .rojo,  .panel .punto.rojo  { background: #d94040; color: white; }
+
+/* Detalle que aparece al pasar el mouse */
+.panel .detalle-cita {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+  width: 230px;
+  background: white;
+  color: #222;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.panel .detalle-cita p { margin: 3px 0; font-size: 10px; }
+.panel .celda:hover .detalle-cita { display: block; }
+
+/* ---------- Columna derecha ---------- */
+.panel .citas-lateral {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel .recurso {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  font-size: 11px;
+}
+
+.panel .etiqueta {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+}
+
+.panel .etiqueta.verde { background: #c8f5d0; color: #1c7a2e; }
+.panel .etiqueta.rojo  { background: #fbd0d0; color: #a11d1d; }
+.panel .etiqueta.gris  { background: #ddd; color: #444; }
+
+.panel select {
+  flex: 1;
+  padding: 5px;
+  font-size: 11px;
+  border-radius: 4px;
+}
+
+@media (max-width: 1000px) {
+  .panel .citas { grid-template-columns: 1fr; }
+}
