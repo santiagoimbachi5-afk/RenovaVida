@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 import SidebarProfesional from "../components/SidebarProfesional.jsx";
 import HeaderPanel from "../components/HeaderPanel.jsx";
-import "../styles/profesional.css";
+import "../styles/Profesional.css";
 
 function LayoutProfesional() {
   return (
