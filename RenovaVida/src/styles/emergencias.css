@@ -1,0 +1,199 @@
+/* ---------- Estructura ---------- */
+.panel .em {
+  display: grid;
+  grid-template-columns: minmax(0, 2.4fr) minmax(0, 1fr);
+  gap: 12px;
+  align-items: start;
+}
+
+.panel .em-lateral {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.panel .em-top,
+.panel .em-lista-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.panel .em-subtitulo {
+  margin: 14px 0 8px;
+  font-size: 12px;
+}
+
+.panel .em-lista-top small,
+.panel .em-ordenado {
+  font-size: 10px;
+  color: #555;
+}
+
+.panel .em-btn-rojo {
+  background: #d93025;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 7px 12px;
+  font-size: 11px;
+  cursor: pointer;
+}
+
+/* ---------- Resumen de alertas ---------- */
+.panel .em-resumen {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+
+.panel .em-caja {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 12px 6px;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.panel .em-caja strong { font-size: 30px; }
+
+.panel .em-total { background: #1b3a6b; color: white; }
+.panel .em-caja-alta { background: #f2a5a5; color: #7a1010; }
+.panel .em-caja-media { background: #fbe58a; color: #6b5300; }
+.panel .em-caja-baja { background: #9fd5aa; color: #1c5a2a; }
+
+/* ---------- Lista de emergencias ---------- */
+.panel .em-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.panel .em-fila {
+  display: grid;
+  grid-template-columns: 20px 1fr 1fr 1.2fr 0.8fr 1fr 1.2fr 110px;
+  gap: 8px;
+  align-items: start;
+  background: white;
+  padding: 10px;
+  border-radius: 6px;
+  border-left: 4px solid #ccc;
+  font-size: 10px;
+}
+
+.panel .em-borde-alta { border-left-color: #d93025; background: #fdf3f3; }
+.panel .em-borde-media { border-left-color: #f2c200; }
+.panel .em-borde-baja { border-left-color: #3aa655; }
+
+.panel .em-num { font-size: 11px; color: #555; }
+
+.panel .em-dato {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.panel .em-dato small { color: #555; font-size: 9px; }
+.panel .em-dato b { font-size: 10px; word-break: break-word; }
+
+.panel .em-barra {
+  height: 5px;
+  background: #d6e4f7;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.panel .em-barra div {
+  height: 100%;
+  background: #3b82f6;
+}
+
+.panel .em-etapa {
+  align-self: flex-start;
+  background: #d6e4f7;
+  color: #1b3a6b;
+  padding: 1px 8px;
+  border-radius: 10px;
+  font-size: 9px;
+}
+
+.panel .em-prioridad {
+  align-self: flex-start;
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.panel .em-alta { background: #d93025; color: white; }
+.panel .em-media { background: #f9c80e; color: #4a3a00; }
+.panel .em-baja { background: #3aa655; color: white; }
+
+.panel .em-accion {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  text-align: center;
+}
+
+.panel .em-accion small { font-size: 8px; color: #555; }
+
+/* ---------- Columna derecha ---------- */
+.panel .em-cabecera-mini {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: bold;
+  margin: 8px 0 4px;
+}
+
+.panel .em-disponible {
+  display: grid;
+  grid-template-columns: 34px 1fr auto;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 0;
+}
+
+.panel .em-disponible .foto { width: 30px; height: 30px; }
+
+.panel .em-notif {
+  display: flex;
+  gap: 6px;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.panel .em-punto-rojo {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 3px;
+  border-radius: 50%;
+  background: #d93025;
+}
+
+/* ---------- Pantallas más pequeñas ---------- */
+@media (max-width: 1200px) {
+  .panel .em-fila {
+    grid-template-columns: 20px 1fr 1fr 1fr;
+  }
+  .panel .em-accion { grid-column: 2 / -1; flex-direction: row; align-items: center; justify-content: space-between; }
+}
+
+@media (max-width: 1000px) {
+  .panel .em { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .panel .em-resumen { grid-template-columns: 1fr 1fr; }
+  .panel .em-fila { grid-template-columns: 20px 1fr 1fr; }
+}
