@@ -12,8 +12,11 @@ const opciones = [
 function SidebarProfesional() {
   return (
     <aside className="sidebar">
+    
+
       <div className="sidebar-logo">
-        Renova<b>Vida</b>
+         Renova<b>Vida</b>
+         <small className="sidebar-rol">Profesional de Salud</small>
       </div>
 
       <nav className="sidebar-menu">
