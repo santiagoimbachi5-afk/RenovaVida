@@ -14,6 +14,7 @@ import ReportesGenerados from './pages/profesional/ReportesGenerados.jsx'
 import SolicitudesUsuarios from './pages/profesional/SolicitudesUsuarios.jsx'
 import PlanesTratamiento from './pages/profesional/PlanesTratamiento.jsx'
 
+
 function App() {
   const location = useLocation()
   const esPanel = location.pathname.startsWith("/profesional")
@@ -37,6 +38,7 @@ function App() {
           <Route path="reportes" element={<ReportesGenerados />} />
           <Route path="solicitudes" element={<SolicitudesUsuarios />} />
           <Route path="planes" element={<PlanesTratamiento />} />
+        
         </Route>
       </Routes>
 
