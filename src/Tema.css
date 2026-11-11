@@ -1,0 +1,229 @@
+body {
+  background: #e0f2fe;
+  color: #1e293b;
+}
+
+.pagina {
+  background: #e0f2fe;
+}
+
+.menu {
+  background: linear-gradient(180deg, #1e40af, #1e3a8a);
+}
+
+.logo,
+.login-marca span {
+  color: #1e40af;
+}
+
+.barra-superior {
+  border-bottom-color: #c7e4f6;
+}
+
+.ruta,
+.tarjeta small,
+.tarjeta em,
+.panel p,
+.grande p,
+.emergencia-panel p,
+.datos p span,
+.plan small,
+.plan p {
+  color: #52647a;
+}
+
+.barra-superior h2,
+.panel h3,
+.grande h3,
+.emergencia-panel h3,
+.plan h4 {
+  color: #1e293b;
+}
+
+.avatar {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+
+.bienvenida {
+  background: linear-gradient(110deg, #1d4ed8, #0284c7);
+}
+
+.tarjeta,
+.panel,
+.login-panel,
+.emergencia-panel {
+  background: #fff;
+  border-color: #dbe5f0;
+  box-shadow: 0 6px 20px rgb(30 64 175 / 8%);
+}
+
+.panel label,
+.formulario label,
+.login-panel label {
+  color: #334155;
+}
+
+input,
+select,
+textarea {
+  border-color: #cbd5e1;
+  background: #fff;
+  color: #1e293b;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #64748b;
+  opacity: 1;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2563eb;
+  box-shadow: 0 0 0 3px rgb(37 99 235 / 14%);
+}
+
+.accion {
+  background: #2563eb;
+}
+
+.accion:hover {
+  background: #1d4ed8;
+}
+
+.secundario {
+  background: #e0f2fe;
+  color: #1d4ed8;
+}
+
+.datos strong {
+  color: #334155;
+}
+
+.opciones-reporte .reporte-opcion {
+  border-color: #dbe5f0;
+  background: #f0f9ff;
+  color: #334155;
+}
+
+.reporte-opcion span {
+  color: #2563eb;
+}
+
+.resultado {
+  background: #e0f2fe;
+  color: #1e40af;
+}
+
+.plan {
+  border-color: #dbe5f0;
+  background: #fff;
+}
+
+.plan header > strong {
+  color: #1d4ed8;
+}
+
+.plan .plan-estado-inactivo {
+  background: #e8eef6;
+  color: #475569;
+}
+
+.acciones-plan button {
+  border-color: #cbd5e1;
+  color: #1d4ed8;
+}
+
+.pie {
+  color: #52647a;
+}
+
+.emergencias-encabezado p,
+.tabla-emergencias td,
+.fila-detalle td {
+  color: #475569;
+}
+
+.tabla-emergencias-contenedor {
+  border-color: #dbe5f0;
+}
+
+.tabla-emergencias th {
+  background: #f0f9ff;
+  color: #475569;
+}
+
+.tabla-emergencias td strong {
+  color: #1e293b;
+}
+
+.acciones-emergencia button {
+  border-color: #cbd5e1;
+  color: #1d4ed8;
+}
+
+.acciones-emergencia .boton-atender:not(.boton-finalizar) {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #fff;
+}
+
+.acciones-emergencia .boton-finalizar {
+  border-color: #bfdbfe;
+  background: #e0f2fe;
+  color: #1d4ed8;
+}
+
+.fila-detalle td {
+  background: #f0f9ff;
+}
+
+.solicitudes-encabezado p,
+.tabla-solicitudes td {
+  color: #475569;
+}
+
+.solicitudes-total {
+  border-color: #dbe5f0;
+  background: #f0f9ff;
+  color: #475569;
+}
+
+.solicitudes-total strong {
+  color: #1d4ed8;
+}
+
+.tabla-solicitudes-contenedor {
+  border-color: #dbe5f0;
+}
+
+.tabla-solicitudes th {
+  background: #f0f9ff;
+  color: #475569;
+}
+
+.tabla-solicitudes td strong {
+  color: #1e293b;
+}
+
+.tabla-solicitudes td small {
+  color: #52647a;
+}
+
+.prioridad-baja {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+.accion-solicitud {
+  border-color: #2563eb;
+  background: #2563eb;
+}
+
+.accion-solicitud.accion-resolver {
+  border-color: #bfdbfe;
+  background: #e0f2fe;
+  color: #1d4ed8;
+}

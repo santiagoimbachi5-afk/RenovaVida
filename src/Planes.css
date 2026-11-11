@@ -1,0 +1,27 @@
+.plan .plan-estado {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.plan .plan-estado::before {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+  content: "";
+}
+
+.plan .plan-estado-activo {
+  background: #e4f6ed;
+  color: #087f52;
+}
+
+.plan .plan-estado-inactivo {
+  background: #edf0ef;
+  color: #68756f;
+}
