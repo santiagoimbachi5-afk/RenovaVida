@@ -1,0 +1,245 @@
+.panel .rep {
+  background: #e9eef3;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* ---------- Título y botones ---------- */
+.panel .rep-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.panel .rep-top h2 {
+  margin: 0;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: 0.3px;
+  color: #111;
+}
+
+.panel .rep-botones { display: flex; gap: 10px; }
+
+.panel .rep-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #12305c;
+  color: #fff;
+  border: 1px solid #0d2447;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+/* ---------- Filas y tarjetas ---------- */
+.panel .rep-fila {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+.panel .rep-card {
+  background: #fff;
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+}
+
+.panel .rep-card h3 {
+  margin: 0 0 8px;
+  font-size: 14px;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #111;
+}
+
+/* ---------- Indicadores ---------- */
+.panel .rep-grande {
+  margin: 0;
+  font-size: 30px;
+  font-weight: 800;
+  line-height: 1.1;
+  color: #111;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.panel .rep-sube { font-size: 15px; font-weight: 500; color: #2e8b4a; }
+.panel .rep-nota { margin: 4px 0 0; font-size: 12px; color: #222; }
+
+.panel .rep-cumplimiento {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.panel .rep-cumplimiento .rep-barra { flex: 1; }
+
+.panel .rep-barra {
+  height: 9px;
+  background: #d9d9d9;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.panel .rep-barra div {
+  height: 100%;
+  background: #4a90d9;
+  border-radius: 5px;
+}
+
+/* ---------- Torta ---------- */
+.panel .rep-torta-fila {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  height: 190px;
+}
+
+.panel .rep-torta {
+  position: relative;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+.panel .rep-torta span {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.panel .rep-leyenda-v {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 13px;
+}
+
+.panel .rep-leyenda-v i {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  border-radius: 2px;
+}
+
+/* ---------- Barras ---------- */
+.panel .rep-barras { display: flex; gap: 6px; }
+
+.panel .rep-barras-eje {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 170px;
+  font-size: 11px;
+  color: #444;
+  text-align: right;
+}
+
+.panel .rep-barras-cuerpo { flex: 1; min-width: 0; }
+
+.panel .rep-barras-area {
+  height: 170px;
+  display: flex;
+  align-items: flex-end;
+  gap: 14px;
+  padding: 0 8px;
+  border-left: 1px solid #999;
+  border-bottom: 1px solid #999;
+}
+
+.panel .rep-barra-col {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+}
+
+.panel .rep-barra-v { width: 100%; }
+
+.panel .rep-barras-etiquetas {
+  display: flex;
+  gap: 14px;
+  padding: 0 8px;
+  margin-top: 6px;
+}
+
+.panel .rep-barras-etiquetas span {
+  flex: 1;
+  text-align: center;
+  font-size: 10px;
+}
+
+/* ---------- Líneas ---------- */
+.panel .rep-leyenda-h {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  font-size: 12px;
+  margin-bottom: 4px;
+}
+
+.panel .rep-linea-ico {
+  display: inline-block;
+  position: relative;
+  width: 20px;
+  height: 2px;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+.panel .rep-linea-ico::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: inherit;
+  transform: translate(-50%, -50%);
+}
+
+.panel .rep-linea-svg { width: 100%; height: auto; display: block; }
+
+/* ---------- Tabla ---------- */
+.panel .rep-tabla { width: 100%; border-collapse: collapse; }
+
+.panel .rep-tabla th,
+.panel .rep-tabla td {
+  padding: 10px 6px;
+  font-size: 13px;
+  text-align: left;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.panel .rep-tabla th { font-size: 14px; font-weight: 700; }
+
+.panel .rep-avance { display: flex; align-items: center; gap: 10px; }
+.panel .rep-avance .rep-barra { flex: 1; max-width: 240px; }
+.panel .rep-avance span { width: 36px; text-align: right; }
+
+.panel .rep-estado {
+  background: #f8e9a8;
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 1100px) {
+  .panel .rep-fila { grid-template-columns: 1fr; }
+}
