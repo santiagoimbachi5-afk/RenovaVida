@@ -3,14 +3,14 @@ import "../../styles/Planes.css";
 
 /* ================= Datos (luego los cambias por los de tu base de datos) ================= */
 const planesIniciales = [
-  { id: 1, paciente: "Elena Rodríguez", idPaciente: "207020", profesional: "Dr. Luis Gómez", especialidad: "Psiquiatra", tipo: "Ser.Farmacologico", inicio: "01/05/2026", estado: "Activo" },
-  { id: 2, paciente: "Jose Alavarez", idPaciente: "207020", profesional: "Dr. Luis Gómez", especialidad: "Psicologo", tipo: "Apoyo conductual", inicio: "01/05/2026", estado: "Activo" },
-  { id: 3, paciente: "Luis Enrique", idPaciente: "207023", profesional: "Dr. Luis Gómez", especialidad: "Med.esepecialista", tipo: "Supervicion fisica", inicio: "01/05/2026", estado: "Suspendido" },
-  { id: 2, paciente: "Luis Miguel", idPaciente: "207020", profesional: "Dr. Luis Gómez", especialidad: "Psicologo", tipo: "Terapia Medica", inicio: "01/05/2026", estado: "Activo" },
-  { id: 4, paciente: "Darins Ceines", idPaciente: "1310026", profesional: "Dr. Luis Gómez", especialidad: "Psicologo", tipo: "Ser.Farmacologico", inicio: "01/05/2026", estado: "Completado" },
-  { id: 5, paciente: "Carolina Hurtado", idPaciente: "207023", profesional: "Dr. Luis Gómez", especialidad: "Med.especialista", tipo: "Desintoxicacion", inicio: "01/05/2026", estado: "Activo" },
-  { id: 6, paciente: "Alejandra Guzman", idPaciente: "207027", profesional: "Dr. Luis Gómez", especialidad: "Med.esepecialista", tipo: "Supervicion fisica", inicio: "01/05/2026", estado: "Suspendido" },
-  { id: 7, paciente: "Laura Sandoval", idPaciente: "1310026", profesional: "Dr. Luis Gómez", especialidad: "Psquiatra", tipo: "Terapia Medica", inicio: "01/05/2026", estado: "Completado" },
+  { id: 1, paciente: "Elena Rodríguez", idPaciente: "207020", profesional: "Dr.Carlos Ruiz", especialidad: "Psiquiatra", tipo: "Ser.Farmacologico", inicio: "01/05/2026", estado: "Activo" },
+  { id: 2, paciente: "Jose Alavarez", idPaciente: "207020", profesional: "Dr.Luis Gómez", especialidad: "Psicologo", tipo: "Apoyo conductual", inicio: "01/05/2026", estado: "Activo" },
+  { id: 3, paciente: "Luis Enrique", idPaciente: "207023", profesional: "Dr.Luis Gómez", especialidad: "Med.esepecialista", tipo: "Supervicion fisica", inicio: "01/05/2026", estado: "Suspendido" },
+  { id: 2, paciente: "Luis Miguel", idPaciente: "207020", profesional: "Dra.Ana Lopez", especialidad: "Psicologo", tipo: "Terapia Medica", inicio: "01/05/2026", estado: "Activo" },
+  { id: 4, paciente: "Darins Ceines", idPaciente: "1310026", profesional: "Dr.Ana Lopez", especialidad: "Psicologo", tipo: "Ser.Farmacologico", inicio: "01/05/2026", estado: "Completado" },
+  { id: 5, paciente: "Carolina Hurtado", idPaciente: "207023", profesional: "Dr.Luis Gómez", especialidad: "Med.especialista", tipo: "Desintoxicacion", inicio: "01/05/2026", estado: "Activo" },
+  { id: 6, paciente: "Alejandra Guzman", idPaciente: "207027", profesional: "Dr.Luis Gómez", especialidad: "Med.esepecialista", tipo: "Supervicion fisica", inicio: "01/05/2026", estado: "Suspendido" },
+  { id: 7, paciente: "Laura Sandoval", idPaciente: "1310026", profesional: "Dr.Carlos Ruiz", especialidad: "Psquiatra", tipo: "Terapia Medica", inicio: "01/05/2026", estado: "Completado" },
 ];
 
 const claseEstado = {
@@ -61,7 +61,7 @@ function PlanesTratamiento() {
         <article className="pl-card">
           <h3>Planes por tipo</h3>
           <p className="pl-grande">
-            95 Dentales <span className="pl-diente">🦷</span>{" "}
+            25 Toxicologia <span className="pl-diente"></span>{" "}
             <span className="pl-sube">▲</span>
           </p>
         </article>
