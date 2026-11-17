@@ -20,6 +20,27 @@ function IniciarSesion() {
     });
   };
 
+    // Usuarios de prueba. Más adelante esto lo responde el backend.
+  const usuariosPrueba = [
+    { correo: "profesional@renovavida.com", rol: "profesional" },
+    { correo: "admin@renovavida.com", rol: "administrador" },
+    { correo: "paciente@renovavida.com", rol: "paciente" },
+  ];
+
+  // A qué ruta va cada rol
+  const rutaPorRol = {
+    profesional: "/profesional",
+    administrador: "/administrador",
+    paciente: "/paciente",
+  };
+
+  const obtenerRol = (correo) => {
+    const usuario = usuariosPrueba.find(
+      (u) => u.correo === correo.trim().toLowerCase()
+    );
+    return usuario ? usuario.rol : null;
+  };
+
   const entrar = (e) => {
     e.preventDefault();
     setError("");
@@ -30,10 +51,16 @@ function IniciarSesion() {
     }
 
     // Aquí irá el fetch al backend más adelante
-    console.log("Datos de inicio de sesión:", datos);
+    const rol = obtenerRol(datos.correo);
 
-    navigate("/");
+    if (!rol) {
+      setError("Ese correo no está registrado");
+      return;
+    }
+
+    navigate(rutaPorRol[rol]);
   };
+  
 
   return (
     <div className="sesion-pagina">
