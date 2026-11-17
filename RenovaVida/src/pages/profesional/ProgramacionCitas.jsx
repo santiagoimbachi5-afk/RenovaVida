@@ -19,21 +19,21 @@ const columnas = [
     ],
   },
   {
-    nombre: "Dra. Ana López", detalle: "Pediatría",
+    nombre: "Dra. Ana López", detalle: "Psicologia",
     celdas: [
       { tipo: "libre" }, { tipo: "libre" },
-      { tipo: "azul", texto: "10:00 AM Pediatría" },
+      { tipo: "azul", texto: "10:00 AM Psicologia" },
       { tipo: "libre" },
-      { tipo: "azul", texto: "11:30 Pediatría" },
+      { tipo: "azul", texto: "11:30 Psicologia" },
       { tipo: "libre" },
-      { tipo: "azul", texto: "2:00 PM Pediatría" },
+      { tipo: "azul", texto: "2:00 PM Psicologia" },
       { tipo: "libre" },
       { tipo: "verde", texto: "4:00 PM" },
       { tipo: "libre" },
     ],
   },
   {
-    nombre: "Dr. Luis Gómez", detalle: "Odontología",
+    nombre: "Dr. Luis Gómez", detalle: "Toxicologo",
     celdas: [
       { tipo: "libre" }, { tipo: "libre" },
       {
@@ -41,11 +41,11 @@ const columnas = [
         texto: "10:00 AM",
         info: {
           paciente: "JUAN PÉREZ",
-          especialidad: "ODONTOLOGÍA",
+          especialidad: "Toxicologo",
           hora: "10:00 AM - 11:00 AM",
           profesional: "DR. RAMÍREZ (Auto-Asignado)",
-          consultorio: "DENTAL 1",
-          equipo: "KIT ODONTOLÓGICO BÁSICO",
+          consultorio: "B1",
+          equipo: "Consulta Toxicologia",
         },
       },
       { tipo: "libre" }, { tipo: "libre" },
@@ -61,10 +61,10 @@ const columnas = [
     celdas: [
       { tipo: "libre" },
       { tipo: "libre", texto: "Consultorio 2B" },
-      { tipo: "verde", texto: "Consultorio Dental 1" },
+      { tipo: "verde", texto: "Consultorio 3B" },
       { tipo: "libre" }, { tipo: "libre" },
       { tipo: "rojo", texto: "Mantenimiento" },
-      { tipo: "azul", texto: "Equipo Ecografía 1" },
+      { tipo: "azul", texto: "Equipo Psquiatria" },
       { tipo: "libre" }, { tipo: "libre" }, { tipo: "libre" },
     ],
   },
@@ -73,7 +73,7 @@ const columnas = [
 const recursos = [
   { nombre: "Consultorios 3A", estado: "Disponible", clase: "verde" },
   { nombre: "Equipos", estado: "Ocupado", clase: "rojo" },
-  { nombre: "Consultorio Dental 1", estado: "Mantenimiento", clase: "gris" },
+  { nombre: "Consultorio Psquiatria", estado: "Mantenimiento", clase: "gris" },
 ];
 
 function ProgramacionCitas() {
@@ -146,7 +146,7 @@ function ProgramacionCitas() {
             <div className="foto"></div>
             <div className="profesional-datos">
               <b>Dr. Carlos Ruiz</b>
-              <small>Cardiología</small>
+              <small>Psiquiatra</small>
             </div>
             <span></span>
             <span className="estado">Activado</span>
