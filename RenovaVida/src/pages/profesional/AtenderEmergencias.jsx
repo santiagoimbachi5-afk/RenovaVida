@@ -4,19 +4,19 @@ const emergencias = [
   {
     id: 1, paciente: "María Gómez", ubicacion: "Sala 3",
     estado: "Atendiendo", progreso: 40, etapa: "En atención",
-    prioridad: "alta", profesional: "Dr. Ramírez",
+    prioridad: "alta", profesional: "Dra. Ana lopez ",
     recursos: "Consultorio 1, Kit Emergencia A",
   },
   {
     id: 2, paciente: "Pedro Pérez", ubicacion: "Cualificación Triage 1",
     estado: "Triage en curso", progreso: null, etapa: null,
-    prioridad: "media", profesional: "Enf. Ana Sosa",
+    prioridad: "media", profesional: "Dr. Carlos Ruiz",
     recursos: "Consultorio 2",
   },
   {
     id: 3, paciente: "Laura Rojas", ubicacion: "Cualificación Triage 2",
     estado: "Triage en curso", progreso: null, etapa: null,
-    prioridad: "alta", profesional: "Enf. Ana Sosa",
+    prioridad: "alta", profesional: "Dr.Luis Gomez",
     recursos: "Sala de observación",
   },
   {
@@ -30,7 +30,7 @@ const emergencias = [
 const disponibles = [
   { id: 1, nombre: "Dr. Carlos Ruiz", especialidad: "Cardiología" },
   { id: 2, nombre: "Dr. Ana López", especialidad: "Ana Sosa" },
-  { id: 3, nombre: "Dr. Pedro Pinto", especialidad: "Medicina General" },
+  { id: 3, nombre: "Dr. Luis Gomez", especialidad: "Medicina General" },
 ];
 
 const recursos = [
