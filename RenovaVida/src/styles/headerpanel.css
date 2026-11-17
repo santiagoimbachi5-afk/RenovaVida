@@ -1,0 +1,16 @@
+.panel .hp-salir-simple {
+  margin-left: 12px;
+  background: #fff;
+  border: 1px solid #d33a35;
+  color: #d33a35;
+  border-radius: 6px;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.panel .hp-salir-simple:hover {
+  background: #d33a35;
+  color: #fff;
+}
