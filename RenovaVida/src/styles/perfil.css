@@ -1,0 +1,277 @@
+.panel .pf {
+  background: #e9eef3;
+  padding: 16px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.panel .pf-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.18);
+  font-size: 13px;
+}
+
+.panel .pf-card h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 800;
+  color: #111;
+}
+
+.panel .pf-titulo {
+  margin-bottom: 12px !important;
+  font-size: 14px !important;
+  letter-spacing: 0.3px;
+}
+
+/* ---------- Fila de arriba ---------- */
+.panel .pf-tarjetas {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1.4fr;
+  gap: 14px;
+}
+
+.panel .pf-derecha {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.panel .pf-ancha { grid-column: 1 / -1; }
+
+/* Institución */
+.panel .pf-inst-cabecera {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.panel .pf-inst-cabecera h3 { color: #12337c; font-size: 18px; }
+.panel .pf-inst-cabecera small { color: #555; font-size: 12px; }
+
+.panel .pf-logo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: #12337c;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.panel .pf-datos { margin: 0; display: flex; flex-direction: column; gap: 6px; }
+.panel .pf-datos div { display: flex; gap: 6px; flex-wrap: wrap; }
+.panel .pf-datos dt { font-weight: 800; }
+.panel .pf-datos dd { margin: 0; color: #333; }
+
+/* Cajas con ícono */
+.panel .pf-icono-caja {
+  width: 46px;
+  height: 46px;
+  border-radius: 10px;
+  background: #dbe7f7;
+  color: #12337c;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.panel .pf-especialidades {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.panel .pf-especialidades p { margin: 6px 0 0; color: #333; line-height: 1.4; }
+
+.panel .pf-stat {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.panel .pf-stat div:nth-child(2) {
+  display: flex;
+  flex-direction: column;
+}
+
+.panel .pf-stat-titulo { font-size: 12px; font-weight: 700; color: #333; }
+.panel .pf-stat strong { font-size: 26px; font-weight: 800; color: #111; line-height: 1.1; }
+
+.panel .pf-stat-extra {
+  margin-left: auto;
+  background: #c8f5d0;
+  color: #1c7a2e;
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* ---------- Listas ---------- */
+.panel .pf-listas {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.panel .pf-filtros {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.panel .pf-buscador,
+.panel .pf-fecha {
+  flex: 1;
+  min-width: 160px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  border: 1px solid #c4c4c4;
+  border-radius: 8px;
+  background: #f4f4f4;
+  font-size: 12px;
+  color: #444;
+}
+
+.panel .pf-buscador input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 12px;
+}
+
+.panel .pf-filtros select {
+  padding: 7px 10px;
+  border: 1px solid #c4c4c4;
+  border-radius: 8px;
+  background: #f4f4f4;
+  font-size: 12px;
+}
+
+/* Profesionales */
+.panel .pf-prof {
+  display: grid;
+  grid-template-columns: 44px 1fr auto 20px;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 6px;
+  border-bottom: 1px solid #ececec;
+  border-radius: 8px;
+}
+
+.panel .pf-prof:hover { background: #f3f6fa; }
+
+.panel .pf-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.panel .pf-prof-datos { display: flex; flex-direction: column; gap: 2px; }
+.panel .pf-prof-datos b { font-size: 14px; }
+.panel .pf-prof-datos small { color: #2e8b4a; font-size: 12px; font-weight: 600; }
+
+.panel .pf-estado {
+  background: #c8f5d0;
+  color: #1c7a2e;
+  padding: 3px 12px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.panel .pf-mas { color: #666; letter-spacing: 1px; }
+
+/* Tabla */
+.panel .pf-tabla-caja { overflow-x: auto; }
+
+.panel .pf-tabla { width: 100%; border-collapse: collapse; min-width: 480px; }
+
+.panel .pf-tabla th {
+  text-align: left;
+  padding: 8px 6px;
+  font-size: 12px;
+  font-weight: 800;
+  background: #f1f3f6;
+  border-bottom: 1px solid #ddd;
+}
+
+.panel .pf-tabla td {
+  padding: 11px 6px;
+  font-size: 12px;
+  border-bottom: 1px solid #ececec;
+}
+
+.panel .pf-tabla tbody tr:hover { background: #f3f6fa; }
+
+.panel .pf-acciones { display: flex; gap: 6px; }
+
+.panel .pf-btn-icono {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #c4c4c4;
+  border-radius: 6px;
+  background: #fff;
+  color: #12337c;
+  cursor: pointer;
+}
+
+.panel .pf-btn-icono:hover { background: #dbe7f7; }
+.panel .pf-rojo { color: #d33a35; }
+.panel .pf-rojo:hover { background: #fbd9d9; }
+
+.panel .pf-ver-mas {
+  display: block;
+  margin: 14px auto 0;
+  background: none;
+  border: none;
+  color: #1a5be0;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.panel .pf-ver-mas:hover { text-decoration: underline; }
+
+.panel .pf-vacio {
+  text-align: center;
+  color: #666;
+  padding: 14px;
+  font-size: 12px;
+}
+
+/* ---------- Pantallas pequeñas ---------- */
+@media (max-width: 1200px) {
+  .panel .pf-tarjetas { grid-template-columns: 1fr 1fr; }
+  .panel .pf-derecha { grid-column: 1 / -1; }
+}
+
+@media (max-width: 1000px) {
+  .panel .pf-listas { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 700px) {
+  .panel .pf-tarjetas { grid-template-columns: 1fr; }
+}
