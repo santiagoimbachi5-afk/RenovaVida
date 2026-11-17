@@ -11,20 +11,20 @@ const institucion = {
   horario: "Lun - Sab 7:00 AM - 9:00 PM",
 };
 
-const especialidades = ["Medicina General", "Pediatría", "Urgencias", "Cardiología"];
+const especialidades = ["Medicina General", "Psiquiatria", "Psicologia", "Toxicologia"];
 
 const profesionales = [
-  { id: 1, nombre: "Dr. Carlos Ruiz", especialidad: "Cardiología", estado: "Activado" },
-  { id: 2, nombre: "Dra. Ana López", especialidad: "Pediatría", estado: "Activado" },
-  { id: 3, nombre: "Dr. Luis Gómez", especialidad: "Medicina General", estado: "Activado" },
-  { id: 4, nombre: "Dra. Marta Sosa", especialidad: "Urgencias", estado: "Activado" },
+  { id: 1, nombre: "Dr. Carlos Ruiz", especialidad: "Psiquiatria", estado: "Activado" },
+  { id: 2, nombre: "Dra. Ana López", especialidad: "Psicologia", estado: "Activado" },
+  { id: 3, nombre: "Dr. Luis Gómez", especialidad: "Medico toxicologo", estado: "Activado" },
+  { id: 4, nombre: "Dra. Marta Sosa", especialidad: "Psquiatria", estado: "Activado" },
 ];
 
 const serviciosIniciales = [
-  { id: 1, servicio: "C. General", especialidad: "Medicina General", profesional: "Dr. Carlos", fecha: "01-Oct-2026", paciente: "José Gregorio" },
-  { id: 2, servicio: "Pediatría", especialidad: "Pediatría", profesional: "Dr. Pérez", fecha: "20-Oct-2026", paciente: "Elena Gómez" },
-  { id: 3, servicio: "Urgencias", especialidad: "Urgencias", profesional: "Dra. Juana", fecha: "22-Oct-2026", paciente: "Laura Iplales" },
-  { id: 4, servicio: "C. General", especialidad: "Medicina General", profesional: "Dr. Castillo", fecha: "22-Sep-2026", paciente: "José Gregorio" },
+  { id: 1, servicio: "Farmacologico", especialidad: "Psiquiatria", profesional: "Dr. Carlos", fecha: "01-Oct-2026", paciente: "José Gregorio" },
+  { id: 2, servicio: "Toxicologia", especialidad: "Med.Especilista", profesional: "Dra. Ana Lopez", fecha: "20-Oct-2026", paciente: "Elena Gómez" },
+  { id: 3, servicio: "Psicologo", especialidad: "Apoyo Conductual", profesional: "Dr. Luis Gomez", fecha: "22-Oct-2026", paciente: "Laura Iplales" },
+  { id: 4, servicio: "Supervicion Fisica", especialidad: "Med.Especialista", profesional: "Dra. Marta Sosa", fecha: "22-Sep-2026", paciente: "José Gregorio" },
 ];
 
 const coloresAvatar = ["#4a7fc1", "#3aa655", "#c98a3c", "#8a6bbf"];
