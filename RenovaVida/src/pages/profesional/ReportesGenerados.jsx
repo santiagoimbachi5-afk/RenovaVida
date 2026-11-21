@@ -1,4 +1,5 @@
 import "../../styles/Reportes.css";
+import { descargarPDF, descargarCSV } from "../../utils/exportar.js";
 
 /* ================= Datos (luego los cambias por los de tu base de datos) ================= */
 const estadoPacientes = [
@@ -96,6 +97,37 @@ function IconoArchivo() {
   );
 }
 
+const columnasPlanes = ["Paciente", "Especialidad", "Avance", "Estado"];
+
+const filasPlanes = planes.map((p) => [
+  p.paciente,
+  p.especialidad,
+  `${p.avance}%`,
+  p.estado,
+]);
+
+function exportarPDF() {
+  descargarPDF({
+    titulo: "Reportes generados y analítica",
+    resumen: [
+      ["Citas de la semana", "120 (+10)"],
+      ["Emergencias atendidas", "15 (+3)"],
+      ["Cumplimiento de tratamientos", "80%"],
+    ],
+    columnas: columnasPlanes,
+    filas: filasPlanes,
+    archivo: "reporte-renovavida",
+  });
+}
+
+function exportarExcel() {
+  descargarCSV({
+    columnas: columnasPlanes,
+    filas: filasPlanes,
+    archivo: "reporte-renovavida",
+  });
+}
+
 function ReportesGenerados() {
   return (
     <div className="rep">
@@ -103,8 +135,10 @@ function ReportesGenerados() {
       <div className="rep-top">
         <h2>REPORTES GENERADOS Y ANALÍTICA</h2>
         <div className="rep-botones">
-          <button className="rep-btn"><IconoArchivo /> Exportar PDF</button>
-          <button className="rep-btn"><IconoArchivo /> Exportar Excel</button>
+          
+          <button className="rep-btn" onClick={exportarPDF}><IconoArchivo /> Exportar PDF</button>
+          <button className="rep-btn" onClick={exportarExcel}><IconoArchivo /> Exportar Excel</button>
+
         </div>
       </div>
 
