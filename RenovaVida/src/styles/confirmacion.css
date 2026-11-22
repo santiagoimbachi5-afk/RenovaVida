@@ -1,0 +1,103 @@
+/* ---------- Ventana de confirmación ---------- */
+.panel .cf-fondo {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.panel .cf-caja {
+  background: #fff;
+  border-radius: 12px;
+  padding: 22px 24px;
+  width: 380px;
+  max-width: 90%;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+  animation: cf-entrar 0.15s ease-out;
+}
+
+.panel .cf-caja h3 {
+  margin: 0 0 10px;
+  font-size: 17px;
+}
+
+.panel .cf-caja p {
+  margin: 0 0 8px;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.4;
+}
+
+.panel .cf-advertencia {
+  color: #a11d1d !important;
+  font-weight: 700;
+}
+
+.panel .cf-botones {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.panel .cf-cancelar,
+.panel .cf-confirmar {
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.panel .cf-cancelar {
+  background: #fff;
+  border: 1px solid #aaa;
+  color: #333;
+}
+
+.panel .cf-confirmar {
+  background: #12337c;
+  border: 1px solid #12337c;
+  color: #fff;
+}
+
+.panel .cf-cancelar:hover { background: #eef1f5; }
+.panel .cf-confirmar:hover { background: #0d2559; }
+
+/* ---------- Aviso corto ---------- */
+.panel .cf-aviso {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  z-index: 1100;
+  animation: cf-entrar 0.2s ease-out;
+}
+
+.panel .cf-exito { background: #2e8b4a; }
+.panel .cf-info { background: #2f6fb5; }
+.panel .cf-error { background: #d33a35; }
+
+.panel .cf-aviso button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+@keyframes cf-entrar {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
