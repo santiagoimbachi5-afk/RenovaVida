@@ -1,0 +1,19 @@
+.panel .ord-th {
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.panel .ord-th:hover {
+  background: #e3e8ef;
+}
+
+.panel .ord-flecha {
+  margin-left: 5px;
+  font-size: 10px;
+  color: #999;
+}
+
+.panel .ord-activa {
+  color: #12337c;
+}
