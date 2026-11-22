@@ -1,17 +1,19 @@
 import { useState } from "react";
 import ModalConfirmar from "../../components/ModalConfirmar.jsx";
 import Aviso from "../../components/Aviso.jsx";
+import ThOrdenable from "../../components/ThOrdenable.jsx"; // NUEVO
+import { useOrdenar } from "../../hooks/useOrdenar.js"; // NUEVO
 import "../../styles/planes.css";
 
 /* ================= Datos (luego los cambias por los de tu base de datos) ================= */
 const planesIniciales = [
-  { id: 1, paciente: "Elena Carmenza", idPaciente: "207020", profesional: "Dr. Carlos Ruiz", especialidad: "Psiquiatra", tipo: "Intervencion clinica ", inicio: "01/05/2026", estado: "Activo" },
-  { id: 2, paciente: "Gloria Itagui", idPaciente: "207020", profesional: "Dra. Ana López", especialidad: "Psicologa", tipo: "Motivo de conculta", inicio: "01/05/2026", estado: "Activo" },
-  { id: 3, paciente: "Doli Perez", idPaciente: "207023", profesional: "Dr. Luis Gómez", especialidad: "Medico Toxicologo", tipo: "Consulta", inicio: "01/05/2026", estado: "Suspendido" },
-  { id: 4, paciente: "Lina Doris", idPaciente: "1310026", profesional: "Dra. Marta Sosa", especialidad: "Psiquiatra", tipo: "Tratamiento psquiatrico", inicio: "01/05/2026", estado: "Completado" },
-  { id: 5, paciente: "Luis Alfonso", idPaciente: "207023", profesional: "Dr. Luis Gómez", especialidad: "Psquiatra", tipo: "Rehabilitacion", inicio: "01/05/2026", estado: "Activo" },
-  { id: 6, paciente: "Elena Rodríguez", idPaciente: "207027", profesional: "Dr. Luis Gómez", especialidad: "Psiquiatra", tipo: "Reabilitacion", inicio: "01/05/2026", estado: "Suspendido" },
-  { id: 7, paciente: "Darins Ceines", idPaciente: "1310026", profesional: "Dr. Luis Gómez", especialidad: "Psiquiatra", tipo: "Reabilitacion", inicio: "01/05/2026", estado: "Completado" },
+  { id: 1, paciente: "Elena Rodríguez", idPaciente: "207020", profesional: "Dr. Luis Gómez", especialidad: "Odontología", tipo: "Ortodoncia Correctiva", inicio: "01/05/2026", estado: "Activo" },
+  { id: 2, paciente: "Elena Rodríguez", idPaciente: "207020", profesional: "Dr. Luis Gómez", especialidad: "Odontología", tipo: "Fisioterapia", inicio: "15/03/2026", estado: "Activo" },
+  { id: 3, paciente: "Elena Rodríguez", idPaciente: "207023", profesional: "Dr. Luis Gómez", especialidad: "Odontología", tipo: "Cardiología", inicio: "10/07/2026", estado: "Suspendido" },
+  { id: 4, paciente: "Darins Ceines", idPaciente: "1310026", profesional: "Dr. Luis Gómez", especialidad: "Odontología", tipo: "Cardiología", inicio: "20/06/2026", estado: "Completado" },
+  { id: 5, paciente: "Elena Rodríguez", idPaciente: "207023", profesional: "Dr. Luis Gómez", especialidad: "Odontología", tipo: "Cardiología", inicio: "01/05/2026", estado: "Activo" },
+  { id: 6, paciente: "Elena Rodríguez", idPaciente: "207027", profesional: "Dr. Luis Gómez", especialidad: "Odontología", tipo: "Cardiología", inicio: "02/02/2026", estado: "Suspendido" },
+  { id: 7, paciente: "Darins Ceines", idPaciente: "1310026", profesional: "Dr. Luis Gómez", especialidad: "Odontología", tipo: "Cardiología", inicio: "01/05/2026", estado: "Completado" },
 ];
 
 const claseEstado = {
@@ -20,7 +22,7 @@ const claseEstado = {
   Completado: "pl-completado",
 };
 
-/* NUEVO: qué dice la ventana y el aviso en cada acción */
+/* Qué dice la ventana y el aviso en cada acción */
 const acciones = {
   Suspender: {
     nuevoEstado: "Suspendido",
@@ -38,6 +40,16 @@ const acciones = {
   },
 };
 
+/* NUEVO: cómo comparar cada columna. La fecha "01/05/2026" se convierte
+   en el número 20260501 para que se ordene bien por fecha, no por letras */
+function valorOrden(plan, campo) {
+  if (campo === "inicio") {
+    const [dia, mes, anio] = plan.inicio.split("/");
+    return Number(`${anio}${mes}${dia}`);
+  }
+  return plan[campo];
+}
+
 // Saca las iniciales de un nombre: "Elena Rodríguez" -> "ER"
 function iniciales(nombre) {
   return nombre
@@ -51,8 +63,6 @@ function PlanesTratamiento() {
   const [planes, setPlanes] = useState(planesIniciales);
   const [busqueda, setBusqueda] = useState("");
   const [verAviso, setVerAviso] = useState(true);
-
-  /* NUEVO: plan y acción que esperan confirmación, y el aviso que se muestra */
   const [pendiente, setPendiente] = useState(null); // { plan, accion }
   const [aviso, setAviso] = useState(null); // { id, texto }
 
@@ -63,17 +73,14 @@ function PlanesTratamiento() {
     );
   };
 
-  /* NUEVO: muestra un aviso corto */
   const mostrarAviso = (texto) => {
     setAviso({ id: Date.now(), texto });
   };
 
-  /* NUEVO: abre la ventana de confirmación */
   const pedirConfirmacion = (plan, accion) => {
     setPendiente({ plan, accion });
   };
 
-  /* NUEVO: el usuario pulsó "Sí" */
   const confirmar = () => {
     const { plan, accion } = pendiente;
     const config = acciones[accion];
@@ -83,20 +90,21 @@ function PlanesTratamiento() {
     setPendiente(null);
   };
 
-  /* NUEVO: reactivar no pide confirmación, solo avisa */
   const reactivar = (plan) => {
     cambiarEstado(plan.id, "Activo");
     mostrarAviso("Plan reactivado");
   };
 
-  // Muestra solo los planes que coinciden con lo que se escribió
+  // Primero se filtra con el buscador...
   const filtrados = planes.filter((p) =>
     `${p.paciente} ${p.idPaciente} ${p.profesional} ${p.especialidad} ${p.tipo} ${p.estado}`
       .toLowerCase()
       .includes(busqueda.toLowerCase())
   );
 
-  // Datos de la ventana abierta (si hay una)
+  /* NUEVO: ...y luego se ordena lo que quedó */
+  const { ordenados, orden, cambiarOrden } = useOrdenar(filtrados, valorOrden);
+
   const configPendiente = pendiente ? acciones[pendiente.accion] : null;
 
   return (
@@ -113,7 +121,7 @@ function PlanesTratamiento() {
         <article className="pl-card">
           <h3>Planes por tipo</h3>
           <p className="pl-grande">
-            95  <span className="pl-diente"></span>{" "}
+            95 Dentales <span className="pl-diente">🦷</span>{" "}
             <span className="pl-sube">▲</span>
           </p>
         </article>
@@ -163,17 +171,29 @@ function PlanesTratamiento() {
           <table className="pl-tabla">
             <thead>
               <tr>
-                <th>Paciente</th>
-                <th>Profesional</th>
-                <th>Tipo de Plan</th>
-                <th>Inicio</th>
-                <th>Estado</th>
+                {/* NUEVO: encabezados que se pueden ordenar */}
+                <ThOrdenable campo="paciente" orden={orden} onOrdenar={cambiarOrden}>
+                  Paciente
+                </ThOrdenable>
+                <ThOrdenable campo="profesional" orden={orden} onOrdenar={cambiarOrden}>
+                  Profesional
+                </ThOrdenable>
+                <ThOrdenable campo="tipo" orden={orden} onOrdenar={cambiarOrden}>
+                  Tipo de Plan
+                </ThOrdenable>
+                <ThOrdenable campo="inicio" orden={orden} onOrdenar={cambiarOrden}>
+                  Inicio
+                </ThOrdenable>
+                <ThOrdenable campo="estado" orden={orden} onOrdenar={cambiarOrden}>
+                  Estado
+                </ThOrdenable>
                 <th>Acciones</th>
               </tr>
             </thead>
 
             <tbody>
-              {filtrados.map((p) => (
+              {/* NUEVO: ahora se recorre "ordenados" en vez de "filtrados" */}
+              {ordenados.map((p) => (
                 <tr key={p.id}>
                   <td>
                     <div className="pl-persona">
@@ -246,7 +266,7 @@ function PlanesTratamiento() {
                 </tr>
               ))}
 
-              {filtrados.length === 0 && (
+              {ordenados.length === 0 && (
                 <tr>
                   <td colSpan="6" className="pl-vacio">
                     No hay planes que coincidan.
@@ -258,7 +278,7 @@ function PlanesTratamiento() {
         </div>
       </section>
 
-      {/* NUEVO: ventana de confirmación */}
+      {/* Ventana de confirmación */}
       <ModalConfirmar
         abierto={pendiente !== null}
         titulo={configPendiente ? configPendiente.titulo : ""}
@@ -273,7 +293,7 @@ function PlanesTratamiento() {
         onCancelar={() => setPendiente(null)}
       />
 
-      {/* NUEVO: aviso corto (el key hace que se reinicie el tiempo en cada aviso) */}
+      {/* Aviso corto */}
       {aviso && (
         <Aviso
           key={aviso.id}
