@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ThOrdenable from "../../components/ThOrdenable.jsx";
+import { useOrdenar } from "../../hooks/useOrdenar.js";
 import "../../styles/solicitudes.css";
 
 /* ================= Datos (luego los cambias por los de tu base de datos) ================= */
@@ -41,6 +43,16 @@ const claseEstado = {
   "En progreso": "sol-progreso",
   "Cerrado": "sol-cerrado",
 };
+
+/* ================= ORDEN: cómo comparar cada columna ================= */
+// Para ordenar por prioridad, "Urgente" tiene que ir primero.
+// Si se ordenara por letras, quedaría al final.
+const pesoPrioridad = { urgente: 1, normal: 2, informativa: 3 };
+
+function valorOrden(solicitud, campo) {
+  if (campo === "prioridad") return pesoPrioridad[solicitud.prioridad];
+  return solicitud[campo];
+}
 
 /* ================= Torta: se dibuja con conic-gradient ================= */
 let acumulado = 0;
@@ -126,12 +138,15 @@ function IconoEquipo() {
 function SolicitudesUsuarios() {
   const [busqueda, setBusqueda] = useState("");
 
-  // Muestra solo las solicitudes que coinciden con lo que se escribió
+  // 1) Primero se filtra con el buscador
   const filtradas = solicitudes.filter((s) =>
     `${s.id} ${s.tipo} ${s.responsable}`
       .toLowerCase()
       .includes(busqueda.toLowerCase())
   );
+
+  // 2) Luego se ordena lo que quedó después del filtro
+  const { ordenados, orden, cambiarOrden } = useOrdenar(filtradas, valorOrden);
 
   return (
     <div className="sol">
@@ -275,16 +290,17 @@ function SolicitudesUsuarios() {
         <table className="sol-tabla">
           <thead>
             <tr>
-              <th>Solicitud ID</th>
-              <th>Tipo Solicitud</th>
-              <th>Prioridad (Auto)</th>
-              <th>Estado</th>
-              <th>Tiempo Transcurrido</th>
-              <th>Responsable (Equipo)</th>
+              <ThOrdenable campo="id" orden={orden} onOrdenar={cambiarOrden}>Solicitud ID</ThOrdenable>
+              <ThOrdenable campo="tipo" orden={orden} onOrdenar={cambiarOrden}>Tipo Solicitud</ThOrdenable>
+              <ThOrdenable campo="prioridad" orden={orden} onOrdenar={cambiarOrden}>Prioridad (Auto)</ThOrdenable>
+              <ThOrdenable campo="estado" orden={orden} onOrdenar={cambiarOrden}>Estado</ThOrdenable>
+              <ThOrdenable campo="tiempo" orden={orden} onOrdenar={cambiarOrden}>Tiempo Transcurrido</ThOrdenable>
+              <ThOrdenable campo="responsable" orden={orden} onOrdenar={cambiarOrden}>Responsable (Equipo)</ThOrdenable>
             </tr>
           </thead>
+
           <tbody>
-            {filtradas.map((s) => (
+            {ordenados.map((s) => (
               <tr key={s.id}>
                 <td>{s.id}</td>
                 <td>{s.tipo}</td>
@@ -306,7 +322,7 @@ function SolicitudesUsuarios() {
               </tr>
             ))}
 
-            {filtradas.length === 0 && (
+            {ordenados.length === 0 && (
               <tr>
                 <td colSpan="6" className="sol-vacio">No hay solicitudes que coincidan.</td>
               </tr>
