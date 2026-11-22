@@ -1,0 +1,50 @@
+.panel .pag {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+.panel .pag-info {
+  color: #555;
+}
+
+.panel .pag-botones {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.panel .pag-btn {
+  min-width: 32px;
+  padding: 6px 10px;
+  border: 1px solid #c4c4c4;
+  border-radius: 6px;
+  background: #fff;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.panel .pag-btn:hover:not(:disabled) {
+  background: #eef1f5;
+}
+
+.panel .pag-actual {
+  background: #12337c;
+  border-color: #12337c;
+  color: #fff;
+  font-weight: 700;
+}
+
+.panel .pag-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.panel .pag-puntos {
+  padding: 0 4px;
+  color: #777;
+}
