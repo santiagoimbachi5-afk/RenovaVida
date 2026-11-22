@@ -1,22 +1,41 @@
 import { useState } from "react";
-import "../../styles/Planes.css";
+import ModalConfirmar from "../../components/ModalConfirmar.jsx";
+import Aviso from "../../components/Aviso.jsx";
+import "../../styles/planes.css";
 
 /* ================= Datos (luego los cambias por los de tu base de datos) ================= */
 const planesIniciales = [
-  { id: 1, paciente: "Elena Rodríguez", idPaciente: "207020", profesional: "Dr.Carlos Ruiz", especialidad: "Psiquiatra", tipo: "Ser.Farmacologico", inicio: "01/05/2026", estado: "Activo" },
-  { id: 2, paciente: "Jose Alavarez", idPaciente: "207020", profesional: "Dr.Luis Gómez", especialidad: "Psicologo", tipo: "Apoyo conductual", inicio: "01/05/2026", estado: "Activo" },
-  { id: 3, paciente: "Luis Enrique", idPaciente: "207023", profesional: "Dr.Luis Gómez", especialidad: "Med.esepecialista", tipo: "Supervicion fisica", inicio: "01/05/2026", estado: "Suspendido" },
-  { id: 2, paciente: "Luis Miguel", idPaciente: "207020", profesional: "Dra.Ana Lopez", especialidad: "Psicologo", tipo: "Terapia Medica", inicio: "01/05/2026", estado: "Activo" },
-  { id: 4, paciente: "Darins Ceines", idPaciente: "1310026", profesional: "Dr.Ana Lopez", especialidad: "Psicologo", tipo: "Ser.Farmacologico", inicio: "01/05/2026", estado: "Completado" },
-  { id: 5, paciente: "Carolina Hurtado", idPaciente: "207023", profesional: "Dr.Luis Gómez", especialidad: "Med.especialista", tipo: "Desintoxicacion", inicio: "01/05/2026", estado: "Activo" },
-  { id: 6, paciente: "Alejandra Guzman", idPaciente: "207027", profesional: "Dr.Luis Gómez", especialidad: "Med.esepecialista", tipo: "Supervicion fisica", inicio: "01/05/2026", estado: "Suspendido" },
-  { id: 7, paciente: "Laura Sandoval", idPaciente: "1310026", profesional: "Dr.Carlos Ruiz", especialidad: "Psquiatra", tipo: "Terapia Medica", inicio: "01/05/2026", estado: "Completado" },
+  { id: 1, paciente: "Elena Carmenza", idPaciente: "207020", profesional: "Dr. Carlos Ruiz", especialidad: "Psiquiatra", tipo: "Intervencion clinica ", inicio: "01/05/2026", estado: "Activo" },
+  { id: 2, paciente: "Gloria Itagui", idPaciente: "207020", profesional: "Dra. Ana López", especialidad: "Psicologa", tipo: "Motivo de conculta", inicio: "01/05/2026", estado: "Activo" },
+  { id: 3, paciente: "Doli Perez", idPaciente: "207023", profesional: "Dr. Luis Gómez", especialidad: "Medico Toxicologo", tipo: "Consulta", inicio: "01/05/2026", estado: "Suspendido" },
+  { id: 4, paciente: "Lina Doris", idPaciente: "1310026", profesional: "Dra. Marta Sosa", especialidad: "Psiquiatra", tipo: "Tratamiento psquiatrico", inicio: "01/05/2026", estado: "Completado" },
+  { id: 5, paciente: "Luis Alfonso", idPaciente: "207023", profesional: "Dr. Luis Gómez", especialidad: "Psquiatra", tipo: "Rehabilitacion", inicio: "01/05/2026", estado: "Activo" },
+  { id: 6, paciente: "Elena Rodríguez", idPaciente: "207027", profesional: "Dr. Luis Gómez", especialidad: "Psiquiatra", tipo: "Reabilitacion", inicio: "01/05/2026", estado: "Suspendido" },
+  { id: 7, paciente: "Darins Ceines", idPaciente: "1310026", profesional: "Dr. Luis Gómez", especialidad: "Psiquiatra", tipo: "Reabilitacion", inicio: "01/05/2026", estado: "Completado" },
 ];
 
 const claseEstado = {
   Activo: "pl-activo",
   Suspendido: "pl-suspendido",
   Completado: "pl-completado",
+};
+
+/* NUEVO: qué dice la ventana y el aviso en cada acción */
+const acciones = {
+  Suspender: {
+    nuevoEstado: "Suspendido",
+    titulo: "¿Suspender este plan?",
+    botonConfirmar: "Sí, suspender",
+    advertencia: "",
+    aviso: "Plan suspendido",
+  },
+  Terminar: {
+    nuevoEstado: "Completado",
+    titulo: "¿Terminar este plan?",
+    botonConfirmar: "Sí, terminar",
+    advertencia: "Un plan completado ya no se puede suspender ni terminar de nuevo.",
+    aviso: "Plan completado",
+  },
 };
 
 // Saca las iniciales de un nombre: "Elena Rodríguez" -> "ER"
@@ -33,11 +52,41 @@ function PlanesTratamiento() {
   const [busqueda, setBusqueda] = useState("");
   const [verAviso, setVerAviso] = useState(true);
 
+  /* NUEVO: plan y acción que esperan confirmación, y el aviso que se muestra */
+  const [pendiente, setPendiente] = useState(null); // { plan, accion }
+  const [aviso, setAviso] = useState(null); // { id, texto }
+
   // Cambia el estado de un plan (y deja igual los demás)
   const cambiarEstado = (id, nuevoEstado) => {
     setPlanes(
       planes.map((p) => (p.id === id ? { ...p, estado: nuevoEstado } : p))
     );
+  };
+
+  /* NUEVO: muestra un aviso corto */
+  const mostrarAviso = (texto) => {
+    setAviso({ id: Date.now(), texto });
+  };
+
+  /* NUEVO: abre la ventana de confirmación */
+  const pedirConfirmacion = (plan, accion) => {
+    setPendiente({ plan, accion });
+  };
+
+  /* NUEVO: el usuario pulsó "Sí" */
+  const confirmar = () => {
+    const { plan, accion } = pendiente;
+    const config = acciones[accion];
+
+    cambiarEstado(plan.id, config.nuevoEstado);
+    mostrarAviso(config.aviso);
+    setPendiente(null);
+  };
+
+  /* NUEVO: reactivar no pide confirmación, solo avisa */
+  const reactivar = (plan) => {
+    cambiarEstado(plan.id, "Activo");
+    mostrarAviso("Plan reactivado");
   };
 
   // Muestra solo los planes que coinciden con lo que se escribió
@@ -46,6 +95,9 @@ function PlanesTratamiento() {
       .toLowerCase()
       .includes(busqueda.toLowerCase())
   );
+
+  // Datos de la ventana abierta (si hay una)
+  const configPendiente = pendiente ? acciones[pendiente.accion] : null;
 
   return (
     <div className="pl">
@@ -61,7 +113,7 @@ function PlanesTratamiento() {
         <article className="pl-card">
           <h3>Planes por tipo</h3>
           <p className="pl-grande">
-            25 Toxicologia <span className="pl-diente"></span>{" "}
+            95  <span className="pl-diente"></span>{" "}
             <span className="pl-sube">▲</span>
           </p>
         </article>
@@ -135,7 +187,9 @@ function PlanesTratamiento() {
 
                   <td>
                     <div className="pl-persona">
-                      <div className="pl-foto pl-foto-prof">{iniciales(p.profesional.replace("Dr. ", ""))}</div>
+                      <div className="pl-foto pl-foto-prof">
+                        {iniciales(p.profesional.replace("Dr. ", ""))}
+                      </div>
                       <div>
                         <b>{p.profesional}</b>
                         <small>{p.especialidad}</small>
@@ -158,7 +212,7 @@ function PlanesTratamiento() {
                       {p.estado === "Suspendido" ? (
                         <button
                           className="pl-accion pl-amarillo"
-                          onClick={() => cambiarEstado(p.id, "Activo")}
+                          onClick={() => reactivar(p)}
                         >
                           <span>▶</span>Reactivar
                         </button>
@@ -166,7 +220,7 @@ function PlanesTratamiento() {
                         <button
                           className="pl-accion pl-amarillo"
                           disabled={p.estado === "Completado"}
-                          onClick={() => cambiarEstado(p.id, "Suspendido")}
+                          onClick={() => pedirConfirmacion(p, "Suspender")}
                         >
                           <span>!</span>Suspender
                         </button>
@@ -179,7 +233,7 @@ function PlanesTratamiento() {
                       <button
                         className="pl-accion pl-verde"
                         disabled={p.estado === "Completado"}
-                        onClick={() => cambiarEstado(p.id, "Completado")}
+                        onClick={() => pedirConfirmacion(p, "Terminar")}
                       >
                         <span>✓</span>Terminar
                       </button>
@@ -203,6 +257,30 @@ function PlanesTratamiento() {
           </table>
         </div>
       </section>
+
+      {/* NUEVO: ventana de confirmación */}
+      <ModalConfirmar
+        abierto={pendiente !== null}
+        titulo={configPendiente ? configPendiente.titulo : ""}
+        mensaje={
+          pendiente
+            ? `Plan de ${pendiente.plan.tipo} de ${pendiente.plan.paciente}.`
+            : ""
+        }
+        advertencia={configPendiente ? configPendiente.advertencia : ""}
+        textoConfirmar={configPendiente ? configPendiente.botonConfirmar : ""}
+        onConfirmar={confirmar}
+        onCancelar={() => setPendiente(null)}
+      />
+
+      {/* NUEVO: aviso corto (el key hace que se reinicie el tiempo en cada aviso) */}
+      {aviso && (
+        <Aviso
+          key={aviso.id}
+          mensaje={aviso.texto}
+          onCerrar={() => setAviso(null)}
+        />
+      )}
     </div>
   );
 }
