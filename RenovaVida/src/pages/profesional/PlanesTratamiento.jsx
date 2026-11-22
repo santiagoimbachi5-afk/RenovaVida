@@ -1,8 +1,10 @@
 import { useState } from "react";
 import ModalConfirmar from "../../components/ModalConfirmar.jsx";
 import Aviso from "../../components/Aviso.jsx";
-import ThOrdenable from "../../components/ThOrdenable.jsx"; // NUEVO
-import { useOrdenar } from "../../hooks/useOrdenar.js"; // NUEVO
+import ThOrdenable from "../../components/ThOrdenable.jsx";
+import Paginacion from "../../components/Paginacion.jsx";
+import { useOrdenar } from "../../hooks/useOrdenar.js";
+import { usePaginacion } from "../../hooks/usePaginacion.js";
 import "../../styles/planes.css";
 
 /* ================= Datos (luego los cambias por los de tu base de datos) ================= */
@@ -40,8 +42,8 @@ const acciones = {
   },
 };
 
-/* NUEVO: cómo comparar cada columna. La fecha "01/05/2026" se convierte
-   en el número 20260501 para que se ordene bien por fecha, no por letras */
+/* Cómo comparar cada columna. La fecha "01/05/2026" se convierte
+   en el número 20260501 para que se ordene bien por fecha */
 function valorOrden(plan, campo) {
   if (campo === "inicio") {
     const [dia, mes, anio] = plan.inicio.split("/");
@@ -49,6 +51,9 @@ function valorOrden(plan, campo) {
   }
   return plan[campo];
 }
+
+// NUEVO: cuántos planes se ven por página
+const POR_PAGINA = 5;
 
 // Saca las iniciales de un nombre: "Elena Rodríguez" -> "ER"
 function iniciales(nombre) {
@@ -95,15 +100,18 @@ function PlanesTratamiento() {
     mostrarAviso("Plan reactivado");
   };
 
-  // Primero se filtra con el buscador...
+  // 1) Primero se filtra con el buscador
   const filtrados = planes.filter((p) =>
     `${p.paciente} ${p.idPaciente} ${p.profesional} ${p.especialidad} ${p.tipo} ${p.estado}`
       .toLowerCase()
       .includes(busqueda.toLowerCase())
   );
 
-  /* NUEVO: ...y luego se ordena lo que quedó */
+  // 2) Luego se ordena lo que quedó
   const { ordenados, orden, cambiarOrden } = useOrdenar(filtrados, valorOrden);
+
+  // 3) NUEVO: por último se corta en páginas
+  const pag = usePaginacion(ordenados, POR_PAGINA);
 
   const configPendiente = pendiente ? acciones[pendiente.accion] : null;
 
@@ -162,7 +170,10 @@ function PlanesTratamiento() {
             className="pl-buscar"
             placeholder="🔍 Buscar paciente o profesional / Filtrar por especialidad"
             value={busqueda}
-            onChange={(e) => setBusqueda(e.target.value)}
+            onChange={(e) => {
+              setBusqueda(e.target.value);
+              pag.irAPagina(1); // NUEVO: al buscar, vuelve a la página 1
+            }}
           />
           <span className="pl-etiqueta">125 planes</span>
         </div>
@@ -171,7 +182,6 @@ function PlanesTratamiento() {
           <table className="pl-tabla">
             <thead>
               <tr>
-                {/* NUEVO: encabezados que se pueden ordenar */}
                 <ThOrdenable campo="paciente" orden={orden} onOrdenar={cambiarOrden}>
                   Paciente
                 </ThOrdenable>
@@ -192,8 +202,8 @@ function PlanesTratamiento() {
             </thead>
 
             <tbody>
-              {/* NUEVO: ahora se recorre "ordenados" en vez de "filtrados" */}
-              {ordenados.map((p) => (
+              {/* NUEVO: ahora se recorre "pag.visibles" (solo los de esta página) */}
+              {pag.visibles.map((p) => (
                 <tr key={p.id}>
                   <td>
                     <div className="pl-persona">
@@ -276,6 +286,16 @@ function PlanesTratamiento() {
             </tbody>
           </table>
         </div>
+
+        {/* NUEVO: botones de paginación */}
+        <Paginacion
+          paginaActual={pag.paginaActual}
+          totalPaginas={pag.totalPaginas}
+          desde={pag.desde}
+          hasta={pag.hasta}
+          total={pag.total}
+          onCambiar={pag.irAPagina}
+        />
       </section>
 
       {/* Ventana de confirmación */}
