@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ThOrdenable from "../../components/ThOrdenable.jsx";
+import { useOrdenar } from "../../hooks/useOrdenar.js";
 import "../../styles/perfil.css";
 
 /* ================= Datos (luego los cambias por los de tu base de datos) ================= */
@@ -11,23 +13,39 @@ const institucion = {
   horario: "Lun - Sab 7:00 AM - 9:00 PM",
 };
 
-const especialidades = ["Medicina General", "Psiquiatria", "Psicologia", "Toxicologia"];
+const especialidades = ["Medicina General", "Pediatría", "Urgencias", "Cardiología"];
 
 const profesionales = [
-  { id: 1, nombre: "Dr. Carlos Ruiz", especialidad: "Psiquiatria", estado: "Activado" },
-  { id: 2, nombre: "Dra. Ana López", especialidad: "Psicologia", estado: "Activado" },
-  { id: 3, nombre: "Dr. Luis Gómez", especialidad: "Medico toxicologo", estado: "Activado" },
-  { id: 4, nombre: "Dra. Marta Sosa", especialidad: "Psquiatria", estado: "Activado" },
+  { id: 1, nombre: "Dr. Carlos Ruiz", especialidad: "Cardiología", estado: "Activado" },
+  { id: 2, nombre: "Dra. Ana López", especialidad: "Pediatría", estado: "Activado" },
+  { id: 3, nombre: "Dr. Luis Gómez", especialidad: "Medicina General", estado: "Activado" },
+  { id: 4, nombre: "Dra. Marta Sosa", especialidad: "Urgencias", estado: "Activado" },
 ];
 
 const serviciosIniciales = [
-  { id: 1, servicio: "Farmacologico", especialidad: "Psiquiatria", profesional: "Dr. Carlos", fecha: "01-Oct-2026", paciente: "José Gregorio" },
-  { id: 2, servicio: "Toxicologia", especialidad: "Med.Especilista", profesional: "Dra. Ana Lopez", fecha: "20-Oct-2026", paciente: "Elena Gómez" },
-  { id: 3, servicio: "Psicologo", especialidad: "Apoyo Conductual", profesional: "Dr. Luis Gomez", fecha: "22-Oct-2026", paciente: "Laura Iplales" },
-  { id: 4, servicio: "Supervicion Fisica", especialidad: "Med.Especialista", profesional: "Dra. Marta Sosa", fecha: "22-Sep-2026", paciente: "José Gregorio" },
+  { id: 1, servicio: "C. General", especialidad: "Medicina General", profesional: "Dr. Carlos", fecha: "01-Oct-2026", paciente: "José Gregorio" },
+  { id: 2, servicio: "Pediatría", especialidad: "Pediatría", profesional: "Dr. Pérez", fecha: "20-Oct-2026", paciente: "Elena Gómez" },
+  { id: 3, servicio: "Urgencias", especialidad: "Urgencias", profesional: "Dra. Juana", fecha: "22-Oct-2026", paciente: "Laura Iplales" },
+  { id: 4, servicio: "C. General", especialidad: "Medicina General", profesional: "Dr. Castillo", fecha: "22-Sep-2026", paciente: "José Gregorio" },
 ];
 
 const coloresAvatar = ["#4a7fc1", "#3aa655", "#c98a3c", "#8a6bbf"];
+
+/* ================= ORDEN: cómo comparar cada columna ================= */
+// Las fechas vienen como "22-Oct-2026". Se convierten en un número
+// (por ejemplo 20261022) para que se ordenen por fecha y no por letras.
+const MESES = {
+  Ene: 1, Feb: 2, Mar: 3, Abr: 4, May: 5, Jun: 6,
+  Jul: 7, Ago: 8, Sep: 9, Oct: 10, Nov: 11, Dic: 12,
+};
+
+function valorOrden(servicio, campo) {
+  if (campo === "fecha") {
+    const [dia, mes, anio] = servicio.fecha.split("-");
+    return Number(anio) * 10000 + MESES[mes] * 100 + Number(dia);
+  }
+  return servicio[campo];
+}
 
 /* ================= Íconos (SVG) ================= */
 const iconos = {
@@ -129,9 +147,13 @@ function Perfil() {
       (espProf === "" || p.especialidad === espProf)
   );
 
+  // 1) Primero se filtra el historial por especialidad
   const servFiltrados = servicios.filter(
     (s) => espServ === "" || s.especialidad === espServ
   );
+
+  // 2) Luego se ordena lo que quedó después del filtro
+  const { ordenados, orden, cambiarOrden } = useOrdenar(servFiltrados, valorOrden);
 
   const eliminarServicio = (id) => {
     if (window.confirm("¿Eliminar este servicio del historial?")) {
@@ -269,15 +291,16 @@ function Perfil() {
             <table className="pf-tabla">
               <thead>
                 <tr>
-                  <th>Servicio</th>
-                  <th>Profesional</th>
-                  <th>Fecha</th>
-                  <th>Paciente</th>
+                  <ThOrdenable campo="servicio" orden={orden} onOrdenar={cambiarOrden}>Servicio</ThOrdenable>
+                  <ThOrdenable campo="profesional" orden={orden} onOrdenar={cambiarOrden}>Profesional</ThOrdenable>
+                  <ThOrdenable campo="fecha" orden={orden} onOrdenar={cambiarOrden}>Fecha</ThOrdenable>
+                  <ThOrdenable campo="paciente" orden={orden} onOrdenar={cambiarOrden}>Paciente</ThOrdenable>
                   <th>Acción</th>
                 </tr>
               </thead>
+
               <tbody>
-                {servFiltrados.map((s) => (
+                {ordenados.map((s) => (
                   <tr key={s.id}>
                     <td>{s.servicio}</td>
                     <td>{s.profesional}</td>
@@ -300,7 +323,7 @@ function Perfil() {
                   </tr>
                 ))}
 
-                {servFiltrados.length === 0 && (
+                {ordenados.length === 0 && (
                   <tr>
                     <td colSpan="5" className="pf-vacio">No hay servicios que coincidan.</td>
                   </tr>
