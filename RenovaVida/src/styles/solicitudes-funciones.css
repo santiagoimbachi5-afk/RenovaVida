@@ -1,0 +1,172 @@
+/* ---------- Botones ---------- */
+.panel .so-btn,
+.panel .so-btn-claro {
+  padding: 7px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid #12337c;
+}
+
+.panel .so-btn { background: #12337c; color: #fff; }
+.panel .so-btn:hover { background: #0d2559; }
+.panel .so-btn-claro { background: #fff; color: #12337c; border-color: #b8c2d4; }
+.panel .so-btn-claro:hover { background: #eef1f5; }
+
+.panel .so-btn.so-verde { background: #2e8b4a; border-color: #2e8b4a; }
+.panel .so-btn.so-naranja { background: #d98a1f; border-color: #d98a1f; }
+.panel .so-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ---------- Barra de la bandeja ---------- */
+.panel .so-barra {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.panel .so-barra select {
+  padding: 6px 8px;
+  border: 1px solid #b8c2d4;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.panel .so-demo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+
+/* ---------- Tabla ---------- */
+.panel .so-tabla-caja { overflow-x: auto; }
+.panel .sol-tabla { min-width: 820px; }
+.panel .sol-tabla tbody tr.so-click { cursor: pointer; }
+
+.panel .sol-tiempo.so-medio .sol-barra div { background: #e6a817; }
+.panel .sol-tiempo.so-alto .sol-barra div { background: #d33a35; }
+
+.panel .so-solic { font-size: 11px; color: #333; }
+
+.panel .so-vacio {
+  text-align: center;
+  color: #666;
+  padding: 16px;
+  font-size: 12px;
+}
+
+/* ---------- Ventanas (usan la base de confirmacion.css) ---------- */
+.panel .cf-caja.so-ancha {
+  width: 540px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.panel .so-form label {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.panel .so-form input,
+.panel .so-form select,
+.panel .so-textarea {
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px;
+  border: 1px solid #b8c2d4;
+  border-radius: 6px;
+  font-size: 13px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.panel .so-textarea { min-height: 70px; resize: vertical; }
+
+.panel .so-error {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #fde4e4;
+  color: #a11d1d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.panel .so-auto {
+  margin-top: 12px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #eef3fb;
+  font-size: 12px;
+}
+
+.panel .so-ayuda { font-size: 11px; color: #666; margin: 6px 0 0; }
+
+.panel .so-detalle-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.panel .so-detalle-top h3 { margin: 0; }
+.panel .so-detalle { margin: 0; }
+
+.panel .so-detalle div {
+  display: flex;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+  align-items: center;
+}
+
+.panel .so-detalle dt { width: 110px; font-weight: 800; color: #444; flex-shrink: 0; }
+.panel .so-detalle dd { margin: 0; flex: 1; }
+.panel .so-detalle dd select {
+  padding: 4px 6px;
+  border: 1px solid #b8c2d4;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.panel .so-respuestas {
+  margin: 8px 0;
+  padding-left: 18px;
+  font-size: 12px;
+  color: #333;
+}
+
+.panel .so-respuestas li { margin-bottom: 4px; }
+
+.panel .so-botones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.panel .so-reglas { width: 100%; border-collapse: collapse; margin-top: 10px; }
+
+.panel .so-reglas th,
+.panel .so-reglas td {
+  padding: 8px 6px;
+  font-size: 12px;
+  text-align: left;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+.panel .so-reglas select {
+  width: 100%;
+  padding: 5px;
+  border: 1px solid #b8c2d4;
+  border-radius: 6px;
+  font-size: 12px;
+}
