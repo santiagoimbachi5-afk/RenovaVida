@@ -1,0 +1,215 @@
+/* ---------- Botones de la barra superior ---------- */
+.panel .ex-acciones {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.panel .ex-btn,
+.panel .ex-btn-claro,
+.panel .ex-btn-pan {
+  padding: 7px 12px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+  border: 1px solid #12337c;
+}
+
+.panel .ex-btn { background: #12337c; color: #fff; }
+.panel .ex-btn:hover { background: #0d2559; }
+.panel .ex-btn-claro { background: #fff; color: #12337c; border-color: #b8c2d4; }
+.panel .ex-btn-claro:hover { background: #eef1f5; }
+.panel .ex-btn-pan { background: #fff; color: #d33a35; border: 1px dashed #d33a35; }
+.panel .ex-btn-pan:hover { background: #fde4e4; }
+
+.panel .ex-btn.ex-verde { background: #2e8b4a; border-color: #2e8b4a; }
+.panel .ex-btn.ex-naranja { background: #d98a1f; border-color: #d98a1f; }
+.panel .ex-btn:disabled { opacity: 0.45; cursor: not-allowed; }
+
+/* ---------- Barra de filtros ---------- */
+.panel .ex-barra {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 10px 0 4px;
+  font-size: 12px;
+}
+
+.panel .ex-barra select {
+  padding: 6px 8px;
+  border: 1px solid #b8c2d4;
+  border-radius: 6px;
+  font-size: 12px;
+}
+
+.panel .ex-demo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+
+/* ---------- Filas ---------- */
+.panel .em-fila { cursor: pointer; }
+.panel .em-fila.ex-seleccionada { box-shadow: 0 0 0 2px #12337c; }
+
+.panel .ex-id {
+  font-family: monospace;
+  font-size: 9px;
+  color: #555;
+}
+
+.panel .ex-estado {
+  align-self: flex-start;
+  padding: 2px 10px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.panel .ex-nuevo { background: #fde4e4; color: #a11d1d; }
+.panel .ex-atencion { background: #d6e4f7; color: #1b3a6b; }
+.panel .ex-cerrado { background: #e1e6ec; color: #444; }
+
+.panel .ex-tiempo { font-size: 9px; font-weight: 700; }
+.panel .ex-t0 { color: #2e8b4a; }
+.panel .ex-t1 { color: #b07a00; }
+.panel .ex-t2 { color: #d33a35; }
+.panel .ex-t3 { color: #fff; background: #d33a35; padding: 1px 4px; border-radius: 3px; }
+.panel .ex-resp { color: #555; }
+
+.panel .ex-derivada {
+  align-self: flex-start;
+  background: #e8def8;
+  color: #4a2a8a;
+  padding: 1px 6px;
+  border-radius: 8px;
+  font-size: 9px;
+  font-weight: 700;
+}
+
+.panel .ex-acc-botones { display: flex; flex-direction: column; gap: 4px; }
+.panel .ex-acc-botones .ex-btn,
+.panel .ex-acc-botones .ex-btn-claro { padding: 5px 4px; font-size: 10px; }
+
+.panel .ex-vacio {
+  text-align: center;
+  color: #666;
+  padding: 16px;
+  font-size: 12px;
+}
+
+/* ---------- Notificaciones ---------- */
+.panel .ex-punto-azul {
+  flex-shrink: 0;
+  width: 8px;
+  height: 8px;
+  margin-top: 3px;
+  border-radius: 50%;
+  background: #2f6fb5;
+}
+
+.panel .ex-nota-lateral { font-size: 10px; color: #555; margin: 4px 0 8px; }
+
+/* ---------- Ventanas ---------- */
+.panel .cf-caja.ex-ancha {
+  width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.panel .ex-form label {
+  display: block;
+  margin-top: 10px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.panel .ex-form input,
+.panel .ex-form select,
+.panel .ex-textarea {
+  width: 100%;
+  margin-top: 4px;
+  padding: 8px;
+  border: 1px solid #b8c2d4;
+  border-radius: 6px;
+  font-size: 13px;
+  box-sizing: border-box;
+  font-family: inherit;
+}
+
+.panel .ex-textarea { min-height: 70px; resize: vertical; }
+
+.panel .ex-error {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: #fde4e4;
+  color: #a11d1d;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.panel .ex-detalle-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.panel .ex-detalle-top h3 { margin: 0; }
+.panel .ex-detalle { margin: 0; }
+
+.panel .ex-detalle div {
+  display: flex;
+  gap: 8px;
+  padding: 6px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 13px;
+}
+
+.panel .ex-detalle dt { width: 110px; font-weight: 800; color: #444; flex-shrink: 0; }
+.panel .ex-detalle dd { margin: 0; }
+
+.panel .ex-contactos {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 12px 0 4px;
+}
+
+.panel .ex-link {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #b8c2d4;
+  background: #f4f7fb;
+  color: #12337c;
+  font-size: 11px;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.panel .ex-link:hover { background: #dbe7f7; }
+
+.panel .ex-notas {
+  margin: 8px 0;
+  padding-left: 18px;
+  font-size: 12px;
+  color: #333;
+}
+
+.panel .ex-notas li { margin-bottom: 4px; }
+
+.panel .ex-botones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.panel .ex-ayuda { font-size: 11px; color: #666; margin: 6px 0 0; }
