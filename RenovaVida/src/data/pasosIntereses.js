@@ -192,4 +192,14 @@ export const pasos = [
       },
     ],
   },
+    {
+    id: "resumen",
+    tipo: "resumen",
+    titulo: "Revisa tus gustos",
+    descripcion:
+      "Mira lo que elegiste. Si quieres cambiar algo, toca «Editar». Podrás modificarlo cuando quieras desde tu perfil.",
+    minimo: 0,
+    omitible: false,
+    textoBoton: "✓ Guardar",
+  },
 ];
