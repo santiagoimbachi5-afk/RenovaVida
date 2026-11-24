@@ -273,6 +273,112 @@
 
 .int-etq-sel:hover { background: var(--int-azul-oscuro); }
 
+/* ---------- Opción "+ Otro" ---------- */
+.int-etq-otro {
+  border-style: dotted;
+  color: var(--int-medio);
+}
+
+.int-otro-caja {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.int-etq-input {
+  width: 150px;
+  padding: 7px 14px;
+  border: 1px solid var(--int-azul);
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 13px;
+  outline: none;
+}
+
+.int-otro-ok {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 999px;
+  background: var(--int-azul);
+  color: #fff;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.int-otro-x {
+  border: none;
+  background: none;
+  color: var(--int-gris);
+  font-size: 14px;
+  cursor: pointer;
+}
+/* ---------- Tipo "tarjetas-grandes" ---------- */
+.int-grandes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  width: 100%;
+  max-width: 480px;
+}
+
+.int-grande {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  min-height: 110px;
+  padding: 18px 16px;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background: #fff;
+  color: var(--int-texto);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(18, 51, 124, 0.15);
+  transition: transform 0.12s, border-color 0.12s, background 0.12s;
+}
+
+.int-grande:hover { transform: translateY(-2px); }
+
+.int-grande-titulo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.int-grande-titulo svg { color: var(--int-medio); }
+
+.int-grande-desc {
+  font-size: 12px;
+  line-height: 1.5;
+  color: var(--int-gris);
+}
+
+.int-grande-sel {
+  border-color: var(--int-azul);
+  background: #f3f7fd;
+}
+
+.int-grande-sel .int-grande-titulo svg { color: var(--int-azul); }
+
+/* La insignia de visto va en la esquina, como en la maqueta */
+.int-grande .int-check {
+  top: -9px;
+  right: -9px;
+  width: 22px;
+  height: 22px;
+  font-size: 13px;
+}
+
+@media (max-width: 800px) {
+  .int-grandes { grid-template-columns: 1fr; }
+}
 /* ---------- Pantalla final ---------- */
 .int-resumen {
   display: flex;
