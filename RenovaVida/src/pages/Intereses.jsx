@@ -7,6 +7,7 @@ import "../styles/intereses.css";
 /* ================= Ayudas ================= */
 // Todas las opciones de un paso, sea de tarjetas o de grupos
 function opcionesDe(paso) {
+  if (paso.tipo === "resumen") return [];
   if (paso.tipo === "grupos") {
     return paso.grupos.flatMap((g) => g.opciones);
   }
@@ -200,6 +201,64 @@ function PanelTarjetasGrandes({ paso, elegidas, alternar }) {
     </div>
   );
 }
+// Cómo se muestra cada paso en la revisión
+// (los pasos con grupos usan el título y el ícono de cada grupo)
+const RESUMEN_PASO = {
+  categorias: { titulo: "Categorías", icono: "hobbies" },
+  frases: { titulo: "Frases", icono: "frases" },
+};
+
+// Tipo "resumen": lista de lo elegido, con un enlace para editar cada paso
+function PanelResumen({ respuestas, irA }) {
+  const filas = [];
+
+  pasos.forEach((p, i) => {
+    if (p.tipo === "resumen") return;
+    const delPaso = respuestas[p.id] || [];
+
+    if (p.tipo === "grupos") {
+      p.grupos.forEach((g) => {
+        filas.push({
+          clave: `${p.id}-${g.id}`,
+          titulo: g.titulo,
+          icono: g.icono,
+          ids: delPaso.filter(
+            (id) => g.opciones.some((o) => o.id === id) || id.startsWith(`otro|${g.id}|`)
+          ),
+          paso: i,
+        });
+      });
+    } else {
+      const info = RESUMEN_PASO[p.id] || { titulo: p.titulo, icono: "hobbies" };
+      filas.push({ clave: p.id, titulo: info.titulo, icono: info.icono, ids: delPaso, paso: i });
+    }
+  });
+
+  return (
+    <div className="int-rev">
+      {filas.map((f) => (
+        <div className="int-rev-fila" key={f.clave}>
+          <h3 className="int-rev-titulo">
+            <Icono nombre={f.icono} tam={20} />
+            {f.titulo}
+          </h3>
+
+          <div className="int-rev-chips">
+            {f.ids.length > 0 ? (
+              f.ids.map((id) => (
+                <span className="int-rev-chip" key={id}>{etiquetaDe(id)}</span>
+              ))
+            ) : (
+              <span className="int-rev-vacio">Sin elegir</span>
+            )}
+          </div>
+
+          <button className="int-rev-editar" onClick={() => irA(f.paso)}>Editar</button>
+        </div>
+      ))}
+    </div>
+  );
+}
 /* ================= Pantalla principal ================= */
 function Intereses() {
   const navigate = useNavigate();
@@ -207,6 +266,7 @@ function Intereses() {
   const [indice, setIndice] = useState(0); // en qué paso va
   const [respuestas, setRespuestas] = useState({}); // { categorias: ["musica"], musica_peliculas: [...] }
   const [terminado, setTerminado] = useState(false);
+  const [volverAlResumen, setVolverAlResumen] = useState(false);
 
   const paso = pasos[indice];
   const elegidas = respuestas[paso.id] || [];
@@ -215,8 +275,13 @@ function Intereses() {
   const porcentaje = ((indice + 1) / pasos.length) * 100;
 
   // Qué panel se dibuja a la derecha, según el tipo del paso
-  const paneles = { tarjetas: PanelTarjetas, grupos: PanelGrupos, "tarjetas-grandes": PanelTarjetasGrandes };
-     const Panel = paneles[paso.tipo];
+    const paneles = {
+    tarjetas: PanelTarjetas,
+    grupos: PanelGrupos,
+    "tarjetas-grandes": PanelTarjetasGrandes,
+    resumen: PanelResumen,
+  };
+  const Panel = paneles[paso.tipo];
 
   // Marca o desmarca una opción
   const alternar = (opcionId) => {
@@ -234,11 +299,21 @@ function Intereses() {
   };
 
   const avanzar = (actuales) => {
-    if (esUltimo) {
+    if (volverAlResumen) {
+      // Venía de "Editar" en el resumen: regresa a la revisión
+      setVolverAlResumen(false);
+      setIndice(pasos.length - 1);
+    } else if (esUltimo) {
       finalizar(actuales);
     } else {
       setIndice(indice + 1);
     }
+  };
+
+  // Salta a un paso desde el resumen
+  const editar = (i) => {
+    setVolverAlResumen(true);
+    setIndice(i);
   };
 
   const continuar = () => avanzar(respuestas);
@@ -315,10 +390,14 @@ function Intereses() {
 
           <h1>{paso.titulo}</h1>
           <p>{paso.descripcion}</p>
-          <p className="int-contador">
-            {paso.minimo > 0 ? `Elige al menos ${paso.minimo}` : "Elige las que quieras"}
-            {" · "}Seleccionadas: {elegidas.length}
-          </p>
+
+          {/* Retoque 1: el contador no se muestra en la revisión */}
+          {paso.tipo !== "resumen" && (
+            <p className="int-contador">
+              {paso.minimo > 0 ? `Elige al menos ${paso.minimo}` : "Elige las que quieras"}
+              {" · "}Seleccionadas: {elegidas.length}
+            </p>
+          )}
 
           <div className="int-botones">
             {indice > 0 && (
@@ -327,8 +406,11 @@ function Intereses() {
               </button>
             )}
 
+            {/* Retoque 2: el texto del botón cambia según el caso */}
             <button className="int-btn" disabled={!puedeContinuar} onClick={continuar}>
-              {esUltimo ? "Finalizar" : "Continuar"}
+              {volverAlResumen
+               ? "Volver al resumen"
+                : paso.textoBoton || (esUltimo ? "Finalizar" : "Continuar")}
             </button>
 
             {paso.omitible && (
@@ -339,7 +421,12 @@ function Intereses() {
 
         {/* Lado derecho */}
         <section className="int-der">
-          <Panel paso={paso} elegidas={elegidas} alternar={alternar} />
+          {/* Retoque 3: el panel recibe también las respuestas y la función Editar */}
+          <Panel paso={paso}
+           elegidas={elegidas} 
+           alternar={alternar} 
+           respuestas={respuestas}
+           irA={editar} />
         </section>
       </main>
     </div>
