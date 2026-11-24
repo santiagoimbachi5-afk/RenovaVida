@@ -13,10 +13,12 @@ import AtenderEmergencias from './pages/profesional/AtenderEmergencias.jsx'
 import ReportesGenerados from './pages/profesional/ReportesGenerados.jsx'
 import SolicitudesUsuarios from './pages/profesional/SolicitudesUsuarios.jsx'
 import PlanesTratamiento from './pages/profesional/PlanesTratamiento.jsx'
+import Intereses from './pages/Intereses.jsx'
+
 
 function App() {
   const location = useLocation()
-  const rutasPanel = ["/profesional", "/administrador", "/paciente"]
+  const rutasPanel = ["/profesional", "/administrador", "/paciente","/intereses"]
   const esPanel = rutasPanel.some((ruta) => location.pathname.startsWith(ruta))
 
   return (
@@ -30,6 +32,7 @@ function App() {
         <Route path="/contactanos" element={<Contactanos />} />
         <Route path="/iniciar-sesion" element={<IniciarSesion />} />
         <Route path="/registro" element={<Registro />} />
+        <Route path="/intereses" element={<Intereses />} />
 
         {/* Rol profesional */}
         <Route path="/profesional" element={<LayoutProfesional />}>
