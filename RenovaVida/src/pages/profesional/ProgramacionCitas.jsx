@@ -11,9 +11,10 @@ const horas = [
 ];
 
 const profesionales = [
-  { id: 1, nombre: "Dr. Carlos Ruiz", especialidad: "Cardiología" },
-  { id: 2, nombre: "Dra. Ana López", especialidad: "Pediatría" },
-  { id: 3, nombre: "Dr. Luis Gómez", especialidad: "Odontología" },
+  { id: 1, nombre: "Dr. Alejandro Ruiz", especialidad: "Psiquiatra" },
+  { id: 2, nombre: "Dra. Belen Lopez", especialidad: "Toxicologo" },
+  { id: 3, nombre: "Dr. Carlos Gomez", especialidad: "Neuropsicologo" },
+  { id: 4, nombre: "Dra. Diana Sofia", especialidad: "Medico genereal" },
 ];
 
 const consultorios = ["Consultorio 1", "Consultorio 2", "Consultorio 3A", "Consultorio Dental 1"];
@@ -56,12 +57,12 @@ const HOY = aISO(new Date());
 
 /* ================= Citas de ejemplo (luego vendrán de la base de datos) ================= */
 const citasIniciales = [
-  { id: 1, fecha: HOY, hora: "9:00 AM", profesionalId: 1, paciente: "Juan Pérez", motivo: "Control", consultorio: "Consultorio 1", estado: "Confirmada" },
-  { id: 2, fecha: HOY, hora: "11:00 AM", profesionalId: 1, paciente: "María Gómez", motivo: "Electrocardiograma", consultorio: "Consultorio 1", estado: "Confirmada" },
-  { id: 3, fecha: HOY, hora: "10:00 AM", profesionalId: 2, paciente: "Laura Rojas", motivo: "Control pediátrico", consultorio: "Consultorio 2", estado: "En curso" },
-  { id: 4, fecha: HOY, hora: "2:00 PM", profesionalId: 2, paciente: "Pedro Pérez", motivo: "Vacunación", consultorio: "Consultorio 2", estado: "Confirmada" },
-  { id: 5, fecha: HOY, hora: "10:00 AM", profesionalId: 3, paciente: "Carlos Díaz", motivo: "Limpieza dental", consultorio: "Consultorio Dental 1", estado: "Confirmada" },
-  { id: 6, fecha: HOY, hora: "4:00 PM", profesionalId: 3, paciente: "Elena Rodríguez", motivo: "Ortodoncia", consultorio: "Consultorio Dental 1", estado: "Confirmada" },
+  { id: 1, fecha: HOY, hora: "9:00 AM", profesionalId: 1, paciente: "Juan Pérez", motivo: "Consulta ", consultorio: "Consultorio 1", estado: "Confirmada" },
+  { id: 2, fecha: HOY, hora: "11:00 AM", profesionalId: 1, paciente: "María Gómez", motivo: "Consulta", consultorio: "Consultorio 1", estado: "Confirmada" },
+  { id: 3, fecha: HOY, hora: "10:00 AM", profesionalId: 2, paciente: "Laura Rojas", motivo: " Sobredosis", consultorio: "Consultorio 2", estado: "En curso" },
+  { id: 4, fecha: HOY, hora: "2:00 PM", profesionalId: 2, paciente: "Pedro Pérez", motivo: "Sobredosis", consultorio: "Consultorio 2", estado: "Confirmada" },
+  { id: 5, fecha: HOY, hora: "10:00 AM", profesionalId: 3, paciente: "Carlos Díaz", motivo: "Reavilitacion", consultorio: "Consultorio  1", estado: "Confirmada" },
+  { id: 6, fecha: HOY, hora: "4:00 PM", profesionalId: 3, paciente: "Elena Rodríguez", motivo: "Control", consultorio: "Consultorio  1", estado: "Confirmada" },
 ];
 
 /* ================= Validación: ¿choca con otra cita? ================= */
@@ -160,7 +161,7 @@ function FormularioCita({ inicial, citas, onGuardar, onCancelar }) {
               name="motivo"
               value={datos.motivo}
               onChange={cambiar}
-              placeholder="Ej: Control, limpieza dental..."
+              placeholder="Ej: Control              ..."
             />
           </label>
 
