@@ -1,0 +1,251 @@
+.int {
+  /* Colores: cámbialos aquí y se actualiza toda la pantalla */
+  --int-azul: #12337c;
+  --int-azul-oscuro: #0d2559;
+  --int-celeste: #79c4ff;
+  --int-medio: #2f6fb5;
+  --int-fondo: #eaf2fc;
+  --int-pista: #dbe7f7;
+  --int-texto: #1f2d46;
+  --int-gris: #5b6b82;
+
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  color: var(--int-texto);
+  font-family: "Poppins", "Segoe UI", Arial, sans-serif;
+}
+
+/* ---------- Barra de arriba (igual que el Navbar) ---------- */
+.int-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 28px;
+  background: var(--int-azul);
+}
+
+.int-marca {
+  margin: 0;
+  font-size: 20px;
+}
+
+.int-renova { color: #ffffff; }
+.int-vida { color: var(--int-celeste); }
+
+.int-salir {
+  color: var(--int-celeste);
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.int-salir:hover { text-decoration: underline; }
+
+/* ---------- Dos columnas ---------- */
+.int-cuerpo {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.int-izq {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 56px;
+}
+
+.int-izq h1 {
+  margin: 0 0 14px;
+  max-width: 420px;
+  font-size: clamp(28px, 4vw, 40px);
+  line-height: 1.15;
+  font-weight: 700;
+  color: var(--int-azul);
+}
+
+.int-izq p {
+  margin: 0 0 10px;
+  max-width: 420px;
+  line-height: 1.6;
+  color: var(--int-gris);
+}
+
+.int-izq .int-contador {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--int-medio);
+}
+
+/* ---------- Progreso ---------- */
+.int-progreso {
+  max-width: 320px;
+  margin-bottom: 24px;
+}
+
+.int-progreso small {
+  font-size: 12px;
+  color: var(--int-gris);
+}
+
+.int-pista {
+  height: 6px;
+  margin-top: 6px;
+  border-radius: 3px;
+  background: var(--int-pista);
+  overflow: hidden;
+}
+
+.int-relleno {
+  height: 100%;
+  border-radius: 3px;
+  background: var(--int-azul);
+  transition: width 0.3s;
+}
+
+/* ---------- Botones ---------- */
+.int-botones {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 22px;
+  margin-top: 22px;
+}
+
+.int-btn {
+  padding: 12px 34px;
+  border: none;
+  border-radius: 999px;
+  background: var(--int-azul);
+  color: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.int-btn:hover:not(:disabled) { background: var(--int-azul-oscuro); }
+
+.int-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.int-link,
+.int-atras {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--int-medio);
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.int-link:hover,
+.int-atras:hover { text-decoration: underline; }
+
+.int-atras {
+  margin-top: 18px;
+  align-self: flex-start;
+}
+
+/* ---------- Lado derecho ---------- */
+.int-der {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  background: var(--int-fondo);
+}
+
+.int-grilla {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+  width: 100%;
+  max-width: 460px;
+}
+
+.int-tarjeta {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 20px 8px 16px;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  background: #fff;
+  color: var(--int-texto);
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 1px 4px rgba(18, 51, 124, 0.15);
+  transition: transform 0.12s, border-color 0.12s, background 0.12s;
+}
+
+.int-tarjeta svg { color: var(--int-medio); }
+.int-tarjeta:hover { transform: translateY(-2px); }
+
+.int-sel {
+  border-color: var(--int-azul);
+  background: #f3f7fd;
+}
+
+.int-sel svg { color: var(--int-azul); }
+
+.int-check {
+  position: absolute;
+  top: 6px;
+  right: 8px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--int-azul);
+  color: #fff;
+  font-size: 11px;
+  font-style: normal;
+}
+
+/* ---------- Pantalla final ---------- */
+.int-chips {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  max-width: 420px;
+}
+
+.int-chip {
+  padding: 8px 18px;
+  border-radius: 999px;
+  background: #fff;
+  color: var(--int-azul);
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 1px 4px rgba(18, 51, 124, 0.15);
+}
+
+.int-vacio {
+  max-width: 320px;
+  text-align: center;
+  color: var(--int-gris);
+  line-height: 1.5;
+}
+
+/* ---------- Celular ---------- */
+@media (max-width: 800px) {
+  .int-cuerpo { grid-template-columns: 1fr; }
+  .int-izq { padding: 28px 22px; }
+  .int-der { padding: 28px 16px; }
+  .int-grilla { grid-template-columns: repeat(2, 1fr); }
+}
