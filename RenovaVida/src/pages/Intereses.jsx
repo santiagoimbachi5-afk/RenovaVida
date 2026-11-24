@@ -4,12 +4,22 @@ import { pasos } from "../data/pasosIntereses.js";
 import Icono from "../components/intereses/Icono.jsx";
 import "../styles/intereses.css";
 
-// Para mostrar el nombre de cada opción elegida en la pantalla final
-const todasLasOpciones = pasos.flatMap((p) => p.opciones);
+/* ================= Ayudas ================= */
+// Todas las opciones de un paso, sea de tarjetas o de grupos
+function opcionesDe(paso) {
+  if (paso.tipo === "grupos") {
+    return paso.grupos.flatMap((g) => g.opciones);
+  }
+  return paso.opciones;
+}
 
+// Para mostrar el nombre de cada opción elegida en la pantalla final
 function etiquetaDe(id) {
-  const opcion = todasLasOpciones.find((o) => o.id === id);
-  return opcion ? opcion.etiqueta : id;
+  for (const paso of pasos) {
+    const opcion = opcionesDe(paso).find((o) => o.id === id);
+    if (opcion) return opcion.etiqueta;
+  }
+  return id;
 }
 
 function Encabezado() {
@@ -24,11 +34,70 @@ function Encabezado() {
   );
 }
 
+/* ================= Lado derecho según el tipo de paso ================= */
+// Tipo "tarjetas": cuadrícula de tarjetas con ícono
+function PanelTarjetas({ paso, elegidas, alternar }) {
+  return (
+    <div className="int-grilla">
+      {paso.opciones.map((o) => {
+        const marcada = elegidas.includes(o.id);
+
+        return (
+          <button
+            key={o.id}
+            className={marcada ? "int-tarjeta int-sel" : "int-tarjeta"}
+            onClick={() => alternar(o.id)}
+            aria-pressed={marcada}
+          >
+            {marcada && <i className="int-check">✓</i>}
+            <Icono nombre={o.icono} />
+            <span>{o.etiqueta}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
+
+// Tipo "grupos": etiquetas agrupadas por tema
+function PanelGrupos({ paso, elegidas, alternar }) {
+  return (
+    <div className="int-grupos">
+      {paso.grupos.map((g) => (
+        <div className="int-grupo" key={g.id}>
+          <h3 className="int-grupo-titulo">
+            <Icono nombre={g.icono} tam={20} />
+            {g.titulo}
+          </h3>
+
+          <div className="int-etiquetas">
+            {g.opciones.map((o) => {
+              const marcada = elegidas.includes(o.id);
+
+              return (
+                <button
+                  key={o.id}
+                  className={marcada ? "int-etq int-etq-sel" : "int-etq"}
+                  onClick={() => alternar(o.id)}
+                  aria-pressed={marcada}
+                >
+                  {o.etiqueta}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+/* ================= Pantalla principal ================= */
 function Intereses() {
   const navigate = useNavigate();
 
   const [indice, setIndice] = useState(0); // en qué paso va
-  const [respuestas, setRespuestas] = useState({}); // { categorias: ["musica", "cine"] }
+  const [respuestas, setRespuestas] = useState({}); // { categorias: ["musica"], musica_peliculas: [...] }
   const [terminado, setTerminado] = useState(false);
 
   const paso = pasos[indice];
@@ -37,7 +106,10 @@ function Intereses() {
   const puedeContinuar = elegidas.length >= paso.minimo;
   const porcentaje = ((indice + 1) / pasos.length) * 100;
 
-  // Marca o desmarca una tarjeta
+  // Qué panel se dibuja a la derecha, según el tipo del paso
+  const Panel = paso.tipo === "grupos" ? PanelGrupos : PanelTarjetas;
+
+  // Marca o desmarca una opción
   const alternar = (opcionId) => {
     const nuevas = elegidas.includes(opcionId)
       ? elegidas.filter((o) => o !== opcionId)
@@ -70,7 +142,10 @@ function Intereses() {
 
   /* ---------- Pantalla final ---------- */
   if (terminado) {
-    const todasElegidas = Object.values(respuestas).flat();
+    // Lo elegido, agrupado por paso (solo los pasos con respuestas)
+    const resumen = pasos
+      .map((p) => ({ titulo: p.titulo, ids: respuestas[p.id] || [] }))
+      .filter((r) => r.ids.length > 0);
 
     return (
       <div className="int">
@@ -90,10 +165,17 @@ function Intereses() {
           </section>
 
           <section className="int-der">
-            {todasElegidas.length > 0 ? (
-              <div className="int-chips">
-                {todasElegidas.map((id) => (
-                  <span className="int-chip" key={id}>{etiquetaDe(id)}</span>
+            {resumen.length > 0 ? (
+              <div className="int-resumen">
+                {resumen.map((r) => (
+                  <div key={r.titulo}>
+                    <h4>{r.titulo}</h4>
+                    <div className="int-chips">
+                      {r.ids.map((id) => (
+                        <span className="int-chip" key={id}>{etiquetaDe(id)}</span>
+                      ))}
+                    </div>
+                  </div>
                 ))}
               </div>
             ) : (
@@ -130,6 +212,12 @@ function Intereses() {
           </p>
 
           <div className="int-botones">
+            {indice > 0 && (
+              <button className="int-btn-claro" onClick={() => setIndice(indice - 1)}>
+                Atrás
+              </button>
+            )}
+
             <button className="int-btn" disabled={!puedeContinuar} onClick={continuar}>
               {esUltimo ? "Finalizar" : "Continuar"}
             </button>
@@ -138,34 +226,11 @@ function Intereses() {
               <button className="int-link" onClick={omitir}>Omitir por ahora</button>
             )}
           </div>
-
-          {indice > 0 && (
-            <button className="int-atras" onClick={() => setIndice(indice - 1)}>
-              ← Atrás
-            </button>
-          )}
         </section>
 
-        {/* Lado derecho: tarjetas */}
+        {/* Lado derecho */}
         <section className="int-der">
-          <div className="int-grilla">
-            {paso.opciones.map((o) => {
-              const marcada = elegidas.includes(o.id);
-
-              return (
-                <button
-                  key={o.id}
-                  className={marcada ? "int-tarjeta int-sel" : "int-tarjeta"}
-                  onClick={() => alternar(o.id)}
-                  aria-pressed={marcada}
-                >
-                  {marcada && <i className="int-check">✓</i>}
-                  <Icono nombre={o.icono} />
-                  <span>{o.etiqueta}</span>
-                </button>
-              );
-            })}
-          </div>
+          <Panel paso={paso} elegidas={elegidas} alternar={alternar} />
         </section>
       </main>
     </div>
