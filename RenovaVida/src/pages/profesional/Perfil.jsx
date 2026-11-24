@@ -13,13 +13,13 @@ const institucion = {
   horario: "Lun - Sab 7:00 AM - 9:00 PM",
 };
 
-const especialidades = ["Medicina General", "Pediatría", "Urgencias", "Cardiología"];
+const especialidades = ["Psquiatra", "Medico Toxicologo", "Medicina general", "Neuropsicologo"];
 
 const profesionales = [
-  { id: 1, nombre: "Dr. Carlos Ruiz", especialidad: "Cardiología", estado: "Activado" },
-  { id: 2, nombre: "Dra. Ana López", especialidad: "Pediatría", estado: "Activado" },
-  { id: 3, nombre: "Dr. Luis Gómez", especialidad: "Medicina General", estado: "Activado" },
-  { id: 4, nombre: "Dra. Marta Sosa", especialidad: "Urgencias", estado: "Activado" },
+  { id: 1, nombre: "Dr. Alejandro Ruiz", especialidad: "Psquiatra", estado: "Activado" },
+  { id: 2, nombre: "Dra. Belen López", especialidad: "Toxicologo", estado: "Activado" },
+  { id: 3, nombre: "Dr. Carlos Gómez", especialidad: "Neuropsicologo", estado: "Activado" },
+  { id: 4, nombre: "Dra. Diana Sosa", especialidad: "Medico general ", estado: "Activado" },
 ];
 
 const serviciosIniciales = [
@@ -197,7 +197,7 @@ function Perfil() {
             <div className="pf-icono-caja"><Icono nombre="profesional" tam={26} /></div>
             <div>
               <span className="pf-stat-titulo">Profesionales</span>
-              <strong>25</strong>
+              <strong>10</strong>
             </div>
             <span className="pf-stat-extra">Activos</span>
           </article>
@@ -206,7 +206,7 @@ function Perfil() {
             <div className="pf-icono-caja"><Icono nombre="pacientes" tam={24} /></div>
             <div>
               <span className="pf-stat-titulo">Pacientes Registrados</span>
-              <strong>320</strong>
+              <strong>100</strong>
             </div>
           </article>
 
@@ -214,7 +214,7 @@ function Perfil() {
             <div className="pf-icono-caja"><Icono nombre="servicios" tam={24} /></div>
             <div>
               <span className="pf-stat-titulo">Servicios Prestados</span>
-              <strong>1,200</strong>
+              <strong>565</strong>
             </div>
           </article>
         </div>
