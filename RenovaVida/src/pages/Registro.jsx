@@ -36,7 +36,7 @@ function Registro() {
     // Aquí irá el fetch al backend más adelante
     console.log("Datos a enviar:", datos);
 
-    navigate("/iniciar-sesion");
+    navigate("/intereses");
   };
 
   return (
