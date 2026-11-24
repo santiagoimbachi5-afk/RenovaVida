@@ -15,6 +15,9 @@ function opcionesDe(paso) {
 
 // Para mostrar el nombre de cada opción elegida en la pantalla final
 function etiquetaDe(id) {
+  // Los gustos escritos por la persona se guardan como "otro|grupo|texto"
+  if (id.startsWith("otro|")) return id.split("|")[2];
+
   for (const paso of pasos) {
     const opcion = opcionesDe(paso).find((o) => o.id === id);
     if (opcion) return opcion.etiqueta;
@@ -60,38 +63,143 @@ function PanelTarjetas({ paso, elegidas, alternar }) {
 }
 
 // Tipo "grupos": etiquetas agrupadas por tema
-function PanelGrupos({ paso, elegidas, alternar }) {
+const MAX_OTROS = 3; // cuántos gustos propios puede agregar por grupo
+
+function GrupoEtiquetas({ grupo, elegidas, alternar }) {
+  const [escribiendo, setEscribiendo] = useState(false);
+  const [texto, setTexto] = useState("");
+
+  const prefijo = `otro|${grupo.id}|`;
+  const propias = elegidas.filter((id) => id.startsWith(prefijo));
+
+  const cerrar = () => {
+    setTexto("");
+    setEscribiendo(false);
+  };
+
+  const agregar = () => {
+    const limpio = texto.replace(/\|/g, "").trim().slice(0, 25);
+
+    if (limpio) {
+      const existente = grupo.opciones.find(
+        (o) => o.etiqueta.toLowerCase() === limpio.toLowerCase()
+      );
+      const id = `${prefijo}${limpio}`;
+      const repetido = propias.some((p) => p.toLowerCase() === id.toLowerCase());
+
+      if (existente) {
+        // Si escribe algo que ya está en la lista, se marca esa opción
+        if (!elegidas.includes(existente.id)) alternar(existente.id);
+      } else if (!repetido) {
+        alternar(id);
+      }
+    }
+    cerrar();
+  };
+
+  const teclas = (e) => {
+    if (e.key === "Enter") agregar();
+    if (e.key === "Escape") cerrar();
+  };
+
   return (
-    <div className="int-grupos">
-      {paso.grupos.map((g) => (
-        <div className="int-grupo" key={g.id}>
-          <h3 className="int-grupo-titulo">
-            <Icono nombre={g.icono} tam={20} />
-            {g.titulo}
-          </h3>
+    <div className="int-grupo">
+      <h3 className="int-grupo-titulo">
+        <Icono nombre={grupo.icono} tam={20} />
+        {grupo.titulo}
+      </h3>
 
-          <div className="int-etiquetas">
-            {g.opciones.map((o) => {
-              const marcada = elegidas.includes(o.id);
+      <div className="int-etiquetas">
+        {grupo.opciones.map((o) => {
+          const marcada = elegidas.includes(o.id);
 
-              return (
-                <button
-                  key={o.id}
-                  className={marcada ? "int-etq int-etq-sel" : "int-etq"}
-                  onClick={() => alternar(o.id)}
-                  aria-pressed={marcada}
-                >
-                  {o.etiqueta}
-                </button>
-              );
-            })}
-          </div>
-        </div>
-      ))}
+          return (
+            <button
+              key={o.id}
+              className={marcada ? "int-etq int-etq-sel" : "int-etq"}
+              onClick={() => alternar(o.id)}
+              aria-pressed={marcada}
+            >
+              {o.etiqueta}
+            </button>
+          );
+        })}
+
+        {/* Gustos escritos por la persona: se quitan con un clic */}
+        {propias.map((id) => (
+          <button
+            key={id}
+            className="int-etq int-etq-sel"
+            onClick={() => alternar(id)}
+            title="Quitar"
+            aria-pressed="true"
+          >
+            {id.split("|")[2]} ✕
+          </button>
+        ))}
+
+        {grupo.permiteOtro &&
+          propias.length < MAX_OTROS &&
+          (escribiendo ? (
+            <span className="int-otro-caja">
+              <input
+                className="int-etq-input"
+                autoFocus
+                maxLength={25}
+                placeholder="Escribe aquí"
+                value={texto}
+                onChange={(e) => setTexto(e.target.value)}
+                onKeyDown={teclas}
+              />
+              <button className="int-otro-ok" onClick={agregar}>Agregar</button>
+              <button className="int-otro-x" onClick={cerrar} title="Cancelar">✕</button>
+            </span>
+          ) : (
+            <button className="int-etq int-etq-otro" onClick={() => setEscribiendo(true)}>
+              + Otro
+            </button>
+          ))}
+      </div>
     </div>
   );
 }
 
+// Tipo "grupos": etiquetas agrupadas por tema
+function PanelGrupos({ paso, elegidas, alternar }) {
+  return (
+    <div className="int-grupos">
+      {paso.grupos.map((g) => (
+        <GrupoEtiquetas key={g.id} grupo={g} elegidas={elegidas} alternar={alternar} />
+      ))}
+    </div>
+  );
+}
+// Tipo "tarjetas-grandes": tarjetas anchas con ícono, título y descripción
+function PanelTarjetasGrandes({ paso, elegidas, alternar }) {
+  return (
+    <div className="int-grandes">
+      {paso.opciones.map((o) => {
+        const marcada = elegidas.includes(o.id);
+
+        return (
+          <button
+            key={o.id}
+            className={marcada ? "int-grande int-grande-sel" : "int-grande"}
+            onClick={() => alternar(o.id)}
+            aria-pressed={marcada}
+          >
+            {marcada && <i className="int-check">✓</i>}
+            <span className="int-grande-titulo">
+              <Icono nombre={o.icono} tam={22} />
+              {o.etiqueta}
+            </span>
+            <span className="int-grande-desc">{o.descripcion}</span>
+          </button>
+        );
+      })}
+    </div>
+  );
+}
 /* ================= Pantalla principal ================= */
 function Intereses() {
   const navigate = useNavigate();
@@ -107,7 +215,8 @@ function Intereses() {
   const porcentaje = ((indice + 1) / pasos.length) * 100;
 
   // Qué panel se dibuja a la derecha, según el tipo del paso
-  const Panel = paso.tipo === "grupos" ? PanelGrupos : PanelTarjetas;
+  const paneles = { tarjetas: PanelTarjetas, grupos: PanelGrupos, "tarjetas-grandes": PanelTarjetasGrandes };
+     const Panel = paneles[paso.tipo];
 
   // Marca o desmarca una opción
   const alternar = (opcionId) => {
